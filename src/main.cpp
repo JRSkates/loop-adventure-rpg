@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Map.h"
+#include "../assets/welcome_message.h"
 
 void display_menu() {
     std::cout << "1. Display Map" << std::endl;
@@ -15,6 +16,8 @@ int main() {
     Player player("Hero");
     Map map(10, 10);
 
+    display_welcome_message();
+    
     bool is_running = true;
 
     while (is_running) {
