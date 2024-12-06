@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "../assets/welcome_message.h"
+#include "../assets/goal_message.h"
 
 void display_menu() {
     std::cout << "1. Display Map" << std::endl;
@@ -17,7 +18,7 @@ int main() {
     Map map(10, 10);
 
     display_welcome_message();
-    
+
     bool is_running = true;
 
     while (is_running) {
@@ -38,9 +39,13 @@ int main() {
 
                 // Update map with the player's movement
                 map.move_player(direction);
-
                 // Display updated map
                 map.display_map();
+
+                if (map.check_win()) {
+                    display_goal_message();
+                    is_running = false; // Exit the game loop
+                }
                 break;
             }
             case 3:
