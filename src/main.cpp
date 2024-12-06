@@ -27,6 +27,14 @@ int main() {
         int choice;
         std::cin >> choice;
 
+        // Check if the input is invalid
+        if (std::cin.fail()) {
+            std::cin.clear(); // Clear the error flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
+            std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
+            continue; // Restart the loop
+        }
+
         switch (choice) {
             case 1: // Display map
                 map.display_map();
