@@ -40,7 +40,6 @@ char Room::get_symbol() const {
 // Update `enter_room` to handle `Item`
 void Room::enter_room(Player& player, const Map& map) {
     clear_screen();
-    map.display_map();
     std::cout << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
@@ -67,17 +66,17 @@ void Room::enter_room(Player& player, const Map& map) {
     std::cout << "==========================================================" << std::endl;
 
      // Pause to allow the player to read the interaction
-    continue_map(map);
+    continue_at_room(map);
 }
 
-void Room::continue_map(const Map& map) {
+void Room::continue_at_room(const Map& map) {
     std::cout << "Press Enter to continue...";
     std::cin.ignore(); // Wait for the player to press Enter
     std::cin.get();    // For clean handling of input buffer
-     
+
     // Immediately display the updated map
     clear_screen();
-    map.display_map();
+    // map.display_map();
 }
 
 

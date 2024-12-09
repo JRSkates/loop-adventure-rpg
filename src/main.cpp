@@ -7,16 +7,8 @@
 #include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
 
-void display_menu() {
-    std::cout << "==========================================================" << std::endl;
-    std::cout << "|                      GAME MENU                        |" << std::endl;
-    std::cout << "==========================================================" << std::endl;
-    std::cout << "| 1. Display Map                                        |" << std::endl;
-    std::cout << "| 2. Move Player                                        |" << std::endl;
-    std::cout << "| 3. Quit                                               |" << std::endl;
-    std::cout << "==========================================================" << std::endl;
-    std::cout << "Enter your choice: ";
-}
+void display_menu();
+// bool toggle_map(Map& map);
 
 int main() {
     std::cout << "================================================================" << std::endl;
@@ -27,8 +19,13 @@ int main() {
     display_welcome_message();
 
     bool is_running = true;
+    bool show_map = false;
 
     while (is_running) {
+        if (show_map) {
+            map.display_map();
+        }
+        // Display menu
         display_menu();
 
         int choice;
@@ -41,11 +38,12 @@ int main() {
             std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
             continue; // Restart the loop
         }
+        
 
         switch (choice) {
             case 1: // Display map
                 clear_screen();
-                map.display_map();
+                show_map = !show_map;
                 break;
 
             case 2: { // Move player
@@ -77,5 +75,17 @@ int main() {
 
     return 0;
 }
+
+void display_menu() {
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                      GAME MENU                        |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| 1. Toggle Map                                         |" << std::endl;
+    std::cout << "| 2. Move Player                                        |" << std::endl;
+    std::cout << "| 3. Quit                                               |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "Enter your choice: ";
+}
+
 
 // clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp -o game && ./game

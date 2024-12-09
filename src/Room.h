@@ -36,7 +36,7 @@ public:
     // Methods
     char get_symbol() const; // returns a character representing the room
     void enter_room(Player &player, const Map &map);
-    void continue_map(const Map& map);
+    void continue_at_room(const Map& map);
 };
 
 #endif // _ROOM_H_
