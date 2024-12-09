@@ -5,8 +5,9 @@
 #include <string>
 #include <vector>
 #include "Item.h"
+#include "Player.h"
 
-class Player; // Forward declaration to avoid circular dependency
+class Map; // Forward declaration to avoid circular dependency
 
 
 class Room {
@@ -34,7 +35,8 @@ public:
 
     // Methods
     char get_symbol() const; // returns a character representing the room
-    void enter_room(Player &player);
+    void enter_room(Player &player, const Map &map);
+    void continue_map();
 };
 
 #endif // _ROOM_H_

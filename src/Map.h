@@ -6,6 +6,8 @@
 #include <iostream>
 #include "Room.h"
 
+class Player; // Forward declaration of Player
+
 class Map {
 private:
     std::vector<std::vector<Room>> grid;

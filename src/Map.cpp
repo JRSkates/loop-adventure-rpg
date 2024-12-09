@@ -3,6 +3,8 @@
 #include <cstdlib> // For rand() and srand()
 #include <ctime>   // For time()
 #include "Map.h"
+#include "Utils.h"
+#include "Player.h"
 
 Map::Map(int width, int height) : player_x(0), player_y(0) {
     std::srand(std::time(0)); // Seed for random number generation
@@ -52,6 +54,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
 
 
 void Map::display_map() const {
+    clear_screen();
     std::cout << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                       MAP VIEW                        |" << std::endl;
@@ -81,12 +84,13 @@ void Map::move_player(char direction, Player& player) {
         case 'a': if (player_x > 0) player_x--; break;
         case 'd': if (player_x < grid[0].size() - 1) player_x++; break;
         default:
+            clear_screen();
             std::cout << "Invalid direction. Please try again." << std::endl;
             return;
     }
 
     // Interact with the room at the new player position
-    grid[player_y][player_x].enter_room(player);
+    grid[player_y][player_x].enter_room(player, *this);
 }
 
 

@@ -1,6 +1,8 @@
 #include "Room.h"
+#include "Map.h"
 #include "Player.h"
 #include <iostream>
+#include "Utils.h"
 
 Room::Room(int x, int y, const std::string& type, Item* loot)
     : x(x), y(y), type(type), loot(loot) {};
@@ -36,7 +38,8 @@ char Room::get_symbol() const {
 }
 
 // Update `enter_room` to handle `Item`
-void Room::enter_room(Player& player) {
+void Room::enter_room(Player& player, const Map& map) {
+
     std::cout << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
@@ -61,6 +64,19 @@ void Room::enter_room(Player& player) {
     }
 
     std::cout << "==========================================================" << std::endl;
+
+     // Pause to allow the player to read the interaction
+    continue_map();
+
+    // Immediately display the updated map
+    clear_screen();
+    map.display_map();
+}
+
+void Room::continue_map() {
+    std::cout << "Press Enter to continue...";
+    std::cin.ignore(); // Wait for the player to press Enter
+    std::cin.get();    // For clean handling of input buffer 
 }
 
 

@@ -54,7 +54,7 @@ int main() {
                 // Update map with the player's movement
                 map.move_player(direction, player);
                 // Display updated map
-                map.display_map();
+                // map.display_map();
 
                 if (map.check_win()) {
                     display_goal_message();
@@ -76,4 +76,4 @@ int main() {
     return 0;
 }
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp -o game && ./game
