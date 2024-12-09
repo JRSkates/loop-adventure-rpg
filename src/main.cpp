@@ -1,13 +1,19 @@
 #include <iostream>
 #include "Player.h"
 #include "Map.h"
-#include "../assets/welcome_message.h"
+#include "Room.h"
+#include "Item.h"
 #include "../assets/goal_message.h"
+#include "../assets/welcome_message.h"
 
 void display_menu() {
-    std::cout << "1. Display Map" << std::endl;
-    std::cout << "2. Move Player" << std::endl;
-    std::cout << "3. Quit" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                      GAME MENU                        |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| 1. Display Map                                        |" << std::endl;
+    std::cout << "| 2. Move Player                                        |" << std::endl;
+    std::cout << "| 3. Quit                                               |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -46,9 +52,9 @@ int main() {
                 std::cin >> direction;
 
                 // Update map with the player's movement
-                map.move_player(direction);
+                map.move_player(direction, player);
                 // Display updated map
-                map.display_map();
+                // map.display_map();
 
                 if (map.check_win()) {
                     display_goal_message();
@@ -70,4 +76,4 @@ int main() {
     return 0;
 }
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp -o game && ./game
