@@ -4,10 +4,11 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "Room.h"
 
 class Map {
 private:
-    std::vector<std::vector<char>> grid;
+    std::vector<std::vector<Room>> grid;
     int player_x;
     int player_y;
     int goal_x;
@@ -19,8 +20,9 @@ public:
 
     //Methods
     void display_map() const;
-    void move_player(char direction);
+    void move_player(char direction, Player& player);
     bool check_win() const;
+
 };
 
 #endif // _MAP_H_

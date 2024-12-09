@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Map.h"
+#include "Room.h"
 #include "../assets/welcome_message.h"
 #include "../assets/goal_message.h"
 
@@ -46,7 +47,7 @@ int main() {
                 std::cin >> direction;
 
                 // Update map with the player's movement
-                map.move_player(direction);
+                map.move_player(direction, player);
                 // Display updated map
                 map.display_map();
 
@@ -70,4 +71,4 @@ int main() {
     return 0;
 }
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp -o game && ./game
