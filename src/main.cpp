@@ -3,6 +3,7 @@
 #include "Map.h"
 #include "Room.h"
 #include "Item.h"
+#include "Utils.h"
 #include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
 
@@ -22,7 +23,7 @@ int main() {
     // Initialize player and map
     Player player("Hero");
     Map map(10, 10);
-
+    clear_screen();
     display_welcome_message();
 
     bool is_running = true;
@@ -43,6 +44,7 @@ int main() {
 
         switch (choice) {
             case 1: // Display map
+                clear_screen();
                 map.display_map();
                 break;
 

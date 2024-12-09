@@ -54,7 +54,6 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
 
 
 void Map::display_map() const {
-    clear_screen();
     std::cout << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                       MAP VIEW                        |" << std::endl;
