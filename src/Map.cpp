@@ -17,7 +17,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
     for (int y = 0; y < height; ++y) {
         std::vector<Room> row;
         for (int x = 0; x < width; ++x) {
-            row.emplace_back(x, y, "empty");
+            row.emplace_back(x, y);
         }
         grid.push_back(row);
     }
@@ -52,7 +52,12 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
 
 
 void Map::display_map() const {
+    std::cout << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                       MAP VIEW                        |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
     for (int y = 0; y < grid.size(); ++y) {
+        std::cout << "| ";
         for (int x = 0; x < grid[y].size(); ++x) {
             if (y == player_y && x == player_x) {
                 std::cout << 'P'; // Show player position dynamically
@@ -60,9 +65,12 @@ void Map::display_map() const {
                 std::cout << grid[y][x].get_symbol(); // Display the room's symbol
             }
         }
-        std::cout << std::endl;
+        std::cout << std::string(grid[0].size() - grid[y].size(), ' ') << " |" << std::endl; // Align row
     }
-    std::cout << "Player position: (" << player_x << ", " << player_y << ")" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| Player position: (" << player_x << ", " << player_y << ")                    |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << std::endl;
 }
 
 void Map::move_player(char direction, Player& player) {

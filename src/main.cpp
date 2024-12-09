@@ -5,12 +5,15 @@
 #include "Item.h"
 #include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
-#include "../assets/goal_message.h"
 
 void display_menu() {
-    std::cout << "1. Display Map" << std::endl;
-    std::cout << "2. Move Player" << std::endl;
-    std::cout << "3. Quit" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                      GAME MENU                        |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| 1. Display Map                                        |" << std::endl;
+    std::cout << "| 2. Move Player                                        |" << std::endl;
+    std::cout << "| 3. Quit                                               |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
 

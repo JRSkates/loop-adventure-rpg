@@ -37,20 +37,30 @@ char Room::get_symbol() const {
 
 // Update `enter_room` to handle `Item`
 void Room::enter_room(Player& player) {
-    std::cout << "You entered a room at (" << x << ", " << y << ")." << std::endl;
+    std::cout << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| You entered a room at (" << x << ", " << y << ").                         |" << std::endl;
+
     if (type == "loot" && loot != nullptr) {
-        std::cout << "You find an item: " << loot->get_name() << "!" << std::endl;
-        loot->display();
+        std::cout << "| You find an item: " << loot->get_name() << "!" << std::endl;
+        loot->display(); // Display item details
+
+        // Optional: Add to inventory logic here
         // if (player.get_inventory().add_item(loot)) {
         //     delete loot; // Free memory after adding to inventory
         //     loot = nullptr; // Remove loot from room
         //     type = "empty"; // Mark room as empty
         // }
-        type = "empty"; // Mark room as empty
+        type = "empty"; // Mark room as empty after interacting
     } else if (type == "exit") {
-        std::cout << "You found the exit! Congratulations, you win!" << std::endl;
+        std::cout << "| You found the exit! Congratulations, you win!          |" << std::endl;
     } else {
-        std::cout << "This room is empty!" << std::endl;
+        std::cout << "| This room is empty!                                   |" << std::endl;
     }
+
+    std::cout << "==========================================================" << std::endl;
 }
+
 
