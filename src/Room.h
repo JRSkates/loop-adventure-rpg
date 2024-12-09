@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Item.h"
 
 class Player; // Forward declaration to avoid circular dependency
 
@@ -13,22 +14,23 @@ private:
     int x;
     int y;
     std::string type; // eg: empty, exit, loot
-    std::string loot; // Loot item in the room
+    Item* loot; // Pointer to an Item object (nullptr if no item)
 
 public:
     // Constructor
-    Room(int x, int y, const std::string& type = "empty", const std::string& loot = "");
+    Room(int x, int y, const std::string& type = "empty", Item* loot = nullptr);
 
+    ~Room();
 
     // Getters
     int get_x() const;
     int get_y() const;
     std::string get_type() const;
-    std::string get_loot() const;
+    Item* get_loot() const;
 
     // Setters
     void set_type(const std::string &type);
-    void set_loot(const std::string &loot);
+    void set_loot(Item* loot);
 
     // Methods
     char get_symbol() const; // returns a character representing the room

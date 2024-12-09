@@ -13,25 +13,41 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
         goal_y = std::rand() % height;
     } while (goal_x == player_x && goal_y == player_y);
 
-    // Initialize grid with Room objects
+    // Initialize grid with empty rooms
     for (int y = 0; y < height; ++y) {
         std::vector<Room> row;
         for (int x = 0; x < width; ++x) {
-            // Create a Room at (x, y) and add it to the row
-            if (x == goal_x && y == goal_y) {
-                row.emplace_back(x, y, "exit"); // Exit room
-            } else if (x == 2 && y == 3) {
-                row.emplace_back(x, y, "loot", "Healing Potion"); // Loot room
-            } else if (x == 5 && y == 7) {
-                row.emplace_back(x, y, "loot", "Magic Sword"); // Loot room
-            } else {
-                row.emplace_back(x, y, "empty"); // Default empty room
-            }
+            row.emplace_back(x, y, "empty");
         }
-        grid.push_back(row); // Add the row to the grid
+        grid.push_back(row);
     }
 
-    // Initialize the starting room as the player's position
+    // Mark the goal room as "exit"
+    grid[goal_y][goal_x].set_type("exit");
+
+    // Randomly place loot rooms
+    int num_loot_rooms = std::rand() % 5 + 3; // Randomly choose 3-7 loot rooms
+    for (int i = 0; i < num_loot_rooms; ++i) {
+        int loot_x, loot_y;
+        do {
+            loot_x = std::rand() % width;
+            loot_y = std::rand() % height;
+        } while ((loot_x == player_x && loot_y == player_y) || // Avoid starting position
+                 (loot_x == goal_x && loot_y == goal_y) ||     // Avoid goal position
+                 grid[loot_y][loot_x].get_type() != "empty");  // Avoid existing loot rooms
+
+        // Assign a random Item to the loot room
+        std::vector<Item> item_pool = {
+            {"Healing Potion", "heal", 50},
+            {"Magic Sword", "attack_boost", 20},
+            {"Shield", "defense_boost", 15},
+            {"Gold Coins", "currency", 100},
+            {"Elixir", "heal", 100},
+        };
+        Item* random_item = new Item(item_pool[std::rand() % item_pool.size()]);
+        grid[loot_y][loot_x].set_type("loot");
+        grid[loot_y][loot_x].set_loot(random_item);
+    }
 }
 
 

@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Map.h"
 #include "Room.h"
+#include "Item.h"
+#include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
 #include "../assets/goal_message.h"
 
@@ -71,4 +73,4 @@ int main() {
     return 0;
 }
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp -o game && ./game
