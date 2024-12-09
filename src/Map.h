@@ -23,7 +23,7 @@ public:
     //Methods
     void display_map() const;
     void move_player(char direction, Player& player);
-    bool check_win() const;
+    bool check_win(Player& player) const;
 
 };
 

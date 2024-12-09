@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Inventory.h"
 
 class Player {
 private:
@@ -11,10 +12,14 @@ private:
     int health;
     int level;
     int experience;
+    Inventory inventory;
 
 public:
     // Constructor
     Player(std::string name);
+
+    // Inventory Accessor
+    Inventory& get_inventory();
 
     // Getters
     std::string get_name() const;
@@ -26,6 +31,8 @@ public:
     void take_damage(int damage);
     void heal(int amount);
     void gain_experience(int amount);
+
+    void view_inventory();
 };
 
 #endif // _PLAYER_H_

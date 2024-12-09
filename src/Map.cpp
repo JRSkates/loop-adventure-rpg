@@ -29,6 +29,16 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
 
     // Randomly place loot rooms
     int num_loot_rooms = std::rand() % 5 + 3; // Randomly choose 3-7 loot rooms
+    bool key_placed = false; // Flag to ensure the Key is placed
+    std::vector<Item> item_pool = {
+        {"Healing Potion", "heal", 50},
+        {"Magic Sword", "attack_boost", 20},
+        {"Shield", "defense_boost", 15},
+        {"Gold Coins", "currency", 100},
+        {"Elixir", "heal", 100},
+        {"Key", "special", 0} // Add the Key as a special item
+    };
+
     for (int i = 0; i < num_loot_rooms; ++i) {
         int loot_x, loot_y;
         do {
@@ -38,15 +48,18 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
                  (loot_x == goal_x && loot_y == goal_y) ||     // Avoid goal position
                  grid[loot_y][loot_x].get_type() != "empty");  // Avoid existing loot rooms
 
-        // Assign a random Item to the loot room
-        std::vector<Item> item_pool = {
-            {"Healing Potion", "heal", 50},
-            {"Magic Sword", "attack_boost", 20},
-            {"Shield", "defense_boost", 15},
-            {"Gold Coins", "currency", 100},
-            {"Elixir", "heal", 100},
-        };
-        Item* random_item = new Item(item_pool[std::rand() % item_pool.size()]);
+        // Assign an Item to the loot room
+        Item* random_item;
+
+        if (!key_placed) {
+            // Place the Key in one of the loot rooms
+            random_item = new Item("Key", "special", 0);
+            key_placed = true;
+        } else {
+            // Assign a random item from the pool
+            random_item = new Item(item_pool[std::rand() % item_pool.size()]);
+        }
+
         grid[loot_y][loot_x].set_type("loot");
         grid[loot_y][loot_x].set_loot(random_item);
     }
@@ -93,6 +106,9 @@ void Map::move_player(char direction, Player& player) {
 }
 
 
-bool Map::check_win() const {
-    return grid[player_y][player_x].get_type() == "exit";
+bool Map::check_win(Player& player) const {
+    if (grid[player_y][player_x].get_type() == "exit") {
+        return player.get_inventory().has_item("Key"); // Check if player has the Key
+    }
+    return false; // Not in the exit room
 }

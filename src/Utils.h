@@ -6,4 +6,5 @@
 // Clears the terminal screen
 void clear_screen();
 
+void continue_screen();
 #endif // UTILS_H

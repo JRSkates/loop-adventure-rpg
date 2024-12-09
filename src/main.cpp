@@ -56,13 +56,16 @@ int main() {
                 // Display updated map
                 // map.display_map();
 
-                if (map.check_win()) {
+                if (map.check_win(player)) {
                     display_goal_message();
                     is_running = false; // Exit the game loop
                 }
                 break;
             }
             case 3:
+                player.view_inventory();
+                break;
+            case 4:
                 std::cout << "Exiting the game. Goodbye!" << std::endl;
                 is_running = false;
                 break;
@@ -82,10 +85,11 @@ void display_menu() {
     std::cout << "==========================================================" << std::endl;
     std::cout << "| 1. Toggle Map                                         |" << std::endl;
     std::cout << "| 2. Move Player                                        |" << std::endl;
-    std::cout << "| 3. Quit                                               |" << std::endl;
+    std::cout << "| 3. View Inventory                                     |" << std::endl;
+    std::cout << "| 4. Quit                                               |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp -o game && ./game

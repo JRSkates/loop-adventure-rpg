@@ -44,21 +44,22 @@ void Room::enter_room(Player& player, const Map& map) {
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
     std::cout << "==========================================================" << std::endl;
-    std::cout << "| You entered a room at (" << x << ", " << y << ").                         |" << std::endl;
+    std::cout << "| You entered a room at (" << x << ", " << y << ").                         " << std::endl;
 
     if (type == "loot" && loot != nullptr) {
         std::cout << "| You find an item: " << loot->get_name() << "!" << std::endl;
         loot->display(); // Display item details
 
-        // Optional: Add to inventory logic here
-        // if (player.get_inventory().add_item(loot)) {
-        //     delete loot; // Free memory after adding to inventory
-        //     loot = nullptr; // Remove loot from room
-        //     type = "empty"; // Mark room as empty
-        // }
+        player.get_inventory().add_item(*loot);
+        std::cout << "| " << loot->get_name() << " has been added to your Inventory!" << std::endl;
+
         type = "empty"; // Mark room as empty after interacting
     } else if (type == "exit") {
-        std::cout << "| You found the exit! Congratulations, you win!          |" << std::endl;
+        if (player.get_inventory().has_item("Key")) {
+            std::cout << "| You found the exit and used the Key to escape!         |" << std::endl;
+        } else {
+            std::cout << "| The exit is locked! You need a Key to escape.          |" << std::endl;
+        }
     } else {
         std::cout << "| This room is empty!                                   |" << std::endl;
     }
@@ -66,17 +67,9 @@ void Room::enter_room(Player& player, const Map& map) {
     std::cout << "==========================================================" << std::endl;
 
      // Pause to allow the player to read the interaction
-    continue_at_room(map);
+    continue_screen();
 }
 
-void Room::continue_at_room(const Map& map) {
-    std::cout << "Press Enter to continue...";
-    std::cin.ignore(); // Wait for the player to press Enter
-    std::cin.get();    // For clean handling of input buffer
 
-    // Immediately display the updated map
-    clear_screen();
-    // map.display_map();
-}
 
 
