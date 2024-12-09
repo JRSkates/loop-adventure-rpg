@@ -3,7 +3,7 @@
 
 // Constructor
 Player::Player(std::string player_name) 
-    : name(player_name), health(100), level(1), experience(0) {
+    : name(player_name), health(100), level(1), experience(0), inventory(inventory) {
 }
 
 // Getters
@@ -39,4 +39,8 @@ void Player::gain_experience(int amount) {
         experience -= 100;
         level++;
     }
+}
+
+void Player::view_inventory() {
+    inventory.display_inventory();
 }

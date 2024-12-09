@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "Inventory.h"
 
 class Player {
 private:
@@ -11,6 +12,7 @@ private:
     int health;
     int level;
     int experience;
+    Inventory inventory;
 
 public:
     // Constructor
@@ -26,6 +28,8 @@ public:
     void take_damage(int damage);
     void heal(int amount);
     void gain_experience(int amount);
+
+    void view_inventory();
 };
 
 #endif // _PLAYER_H_

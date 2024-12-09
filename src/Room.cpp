@@ -66,17 +66,9 @@ void Room::enter_room(Player& player, const Map& map) {
     std::cout << "==========================================================" << std::endl;
 
      // Pause to allow the player to read the interaction
-    continue_at_room(map);
+    continue_screen();
 }
 
-void Room::continue_at_room(const Map& map) {
-    std::cout << "Press Enter to continue...";
-    std::cin.ignore(); // Wait for the player to press Enter
-    std::cin.get();    // For clean handling of input buffer
 
-    // Immediately display the updated map
-    clear_screen();
-    // map.display_map();
-}
 
 
