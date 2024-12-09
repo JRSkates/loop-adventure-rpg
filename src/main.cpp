@@ -14,7 +14,7 @@ int main() {
     std::cout << "================================================================" << std::endl;
     // Initialize player and map
     Player player("Hero");
-    Map map(6, 6);
+    Map map(10, 10);
     clear_screen();
     display_welcome_message();
 
@@ -56,7 +56,7 @@ int main() {
                 // Display updated map
                 // map.display_map();
 
-                if (map.check_win()) {
+                if (map.check_win(player)) {
                     display_goal_message();
                     is_running = false; // Exit the game loop
                 }
@@ -85,7 +85,7 @@ void display_menu() {
     std::cout << "==========================================================" << std::endl;
     std::cout << "| 1. Toggle Map                                         |" << std::endl;
     std::cout << "| 2. Move Player                                        |" << std::endl;
-    std::cout << "| 3. View Inventory                                              |" << std::endl;
+    std::cout << "| 3. View Inventory                                     |" << std::endl;
     std::cout << "| 4. Quit                                               |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";

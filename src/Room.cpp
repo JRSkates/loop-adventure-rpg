@@ -55,7 +55,11 @@ void Room::enter_room(Player& player, const Map& map) {
 
         type = "empty"; // Mark room as empty after interacting
     } else if (type == "exit") {
-        std::cout << "| You found the exit! Congratulations, you win!          |" << std::endl;
+        if (player.get_inventory().has_item("Key")) {
+            std::cout << "| You found the exit and used the Key to escape!         |" << std::endl;
+        } else {
+            std::cout << "| The exit is locked! You need a Key to escape.          |" << std::endl;
+        }
     } else {
         std::cout << "| This room is empty!                                   |" << std::endl;
     }

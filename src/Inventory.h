@@ -20,6 +20,11 @@ public:
     void add_item(const Item& item);
     void remove_item(int index);
     void display_inventory() const;
+
+    bool has_item(const std::string& item_name) const; // General-purpose method to check for any item
+    bool has_key() const; // Specific method to check for the Key
+
+
 };
 
 #endif // _INVENTORY_H_

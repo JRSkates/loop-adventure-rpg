@@ -47,3 +47,17 @@ void Inventory::display_inventory() const {
     continue_screen();
 }
 
+
+bool Inventory::has_item(const std::string& item_name) const {
+    for (const auto& item : items) {
+        if (item.get_name() == item_name) {
+            return true; // Item found
+        }
+    }
+    return false; // Item not found
+}
+
+bool Inventory::has_key() const {
+    return has_item("Key"); // Reuse the has_item method
+}
+
