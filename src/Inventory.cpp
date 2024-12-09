@@ -36,7 +36,6 @@ void Inventory::display_inventory() const {
     if(items.size() == 0) {
         std::cout << "No Items In Inventory" << std::endl;
     } else {
-        std::cout << "Inventory:" << std::endl;
         for(const auto& item : items) {
             item.display();
         }

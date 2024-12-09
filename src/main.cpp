@@ -14,7 +14,7 @@ int main() {
     std::cout << "================================================================" << std::endl;
     // Initialize player and map
     Player player("Hero");
-    Map map(10, 10);
+    Map map(6, 6);
     clear_screen();
     display_welcome_message();
 

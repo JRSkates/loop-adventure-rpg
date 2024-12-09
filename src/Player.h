@@ -18,6 +18,9 @@ public:
     // Constructor
     Player(std::string name);
 
+    // Inventory Accessor
+    Inventory& get_inventory();
+
     // Getters
     std::string get_name() const;
     int get_health() const;

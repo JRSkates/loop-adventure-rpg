@@ -12,5 +12,5 @@ int Item::get_value() const { return value; }
 
 // Display item details
 void Item::display() const {
-    std::cout << "Item: " << name << ", Effect: " << effect << ", Value: " << value << std::endl;
+    std::cout << "| Item: " << name << ", Effect: " << effect << ", Value: " << value << std::endl;
 }
