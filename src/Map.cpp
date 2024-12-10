@@ -98,10 +98,10 @@ void Map::display_map() const {
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                       MAP VIEW                        |" << std::endl;
     std::cout << "==========================================================" << std::endl;
-    for (int y = 0; y < grid.size(); ++y) {
+    for (size_t y = 0; y < grid.size(); ++y) {
         std::cout << "| ";
-        for (int x = 0; x < grid[y].size(); ++x) {
-            if (y == player_y && x == player_x) {
+        for (size_t x = 0; x < grid[y].size(); ++x) {
+            if (y == static_cast<size_t>(player_y) && x == static_cast<size_t>(player_x)) {
                 std::cout << 'P'; // Show player position dynamically
             } else {
                 std::cout << grid[y][x].get_symbol(); // Display the room's symbol
@@ -119,9 +119,9 @@ void Map::move_player(char direction, Player& player) {
     // Update player position based on direction
     switch (direction) {
         case 'w': if (player_y > 0) player_y--; break;
-        case 's': if (player_y < grid.size() - 1) player_y++; break;
+        case 's': if (player_y < static_cast<int>(grid.size()) - 1) player_y++; break;
         case 'a': if (player_x > 0) player_x--; break;
-        case 'd': if (player_x < grid[0].size() - 1) player_x++; break;
+        case 'd': if (player_x < static_cast<int>(grid.size()) - 1) player_x++; break;
         default:
             clear_screen();
             std::cout << "Invalid direction. Please try again." << std::endl;
@@ -129,7 +129,7 @@ void Map::move_player(char direction, Player& player) {
     }
 
     // Interact with the room at the new player position
-    grid[player_y][player_x].enter_room(player, *this);
+    grid[player_y][player_x].enter_room(player);
 }
 
 

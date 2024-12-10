@@ -16,8 +16,8 @@ private:
     int health;
     int level;
     int experience;
-    int attack_power;
     Inventory inventory;
+    int attack_power;
 
 public:
     // Constructor

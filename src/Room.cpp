@@ -49,7 +49,7 @@ char Room::get_symbol() const {
 }
 
 // Update `enter_room` to handle `Item`
-void Room::enter_room(Player& player, const Map& map) {
+void Room::enter_room(Player& player) {
     clear_screen();
     std::cout << std::endl;
     std::cout << "==========================================================" << std::endl;

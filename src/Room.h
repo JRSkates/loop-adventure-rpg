@@ -41,7 +41,7 @@ public:
 
     // Methods
     char get_symbol() const; // returns a character representing the room
-    void enter_room(Player &player, const Map &map);
+    void enter_room(Player &player);
 };
 
 #endif // _ROOM_H_
