@@ -139,5 +139,7 @@ void display_use_item(Player& player) {
     //continue_screen(); // Wait for the user to press Enter
 }
 
+// make - creates the game file
+// ./game
 
 // clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp -o game && ./game
