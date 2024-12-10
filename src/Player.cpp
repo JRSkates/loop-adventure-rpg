@@ -45,6 +45,12 @@ void Player::heal(int amount) {
     if (health > 100) health = 100; // Cap health at 100
 }
 
+void Player::boost_attack(int value) {
+    attack_power += value;
+    std::cout << name << " boosts attack power by " << value << "!" << std::endl;
+    std::cout << "attack power is now: " << attack_power << std::endl;
+}
+
 void Player::gain_experience(int amount) {
     experience += amount;
     if (experience >= 100) { // Level up every 100 XP

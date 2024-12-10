@@ -36,6 +36,7 @@ public:
     void take_damage(int damage);
     void attack(Enemy& enemy) const;
     void heal(int amount);
+    void boost_attack(int value);
     void gain_experience(int amount);
 
     void view_inventory();

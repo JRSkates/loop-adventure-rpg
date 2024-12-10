@@ -61,3 +61,27 @@ bool Inventory::has_key() const {
     return has_item("Key"); // Reuse the has_item method
 }
 
+bool Inventory::use_item(const std::string& item_name, Player& player) {
+    for (auto it = items.begin(); it != items.end(); ++it) {
+        if (it->get_name() == item_name) {
+            const std::string& effect = it->get_effect();
+            int value = it->get_value();
+
+            // Apply the item's effect to the player
+            if (effect == "heal") {
+                player.heal(value);
+            } else if (effect == "attack_boost") {
+                player.boost_attack(value);
+            } else if (effect == "special") {
+                std::cout << "You used a special item: " << item_name << "!" << std::endl;
+            }
+
+            // Remove the used item from inventory
+            items.erase(it); // Erase the item at this iterator
+            return true; // Item successfully used
+        }
+    }
+    std::cout << "Item not found in inventory!" << std::endl;
+    return false; // Item not found
+}
+
