@@ -66,6 +66,14 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
 
     // Randomly place enemy rooms
     int num_enemy_rooms = std::rand() % 3 + 2; // Randomly choose 2-5 enemy rooms
+    std::vector<Enemy> enemy_pool = {
+        {"Goblin", 50, 10, 25},
+        {"Troll", 75, 20, 50},
+        {"Rat", 10, 2, 5},
+        {"Mystery Man", 100, 50, 100}
+    };
+
+
     for (int i = 0; i < num_enemy_rooms; ++i) {
         int enemy_x, enemy_y;
         do {
@@ -75,8 +83,12 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
                 (enemy_x == goal_x && enemy_y == goal_y) ||     // Avoid goal position
                 grid[enemy_y][enemy_x].get_type() != "empty");  // Avoid existing occupied rooms
 
+        Enemy* random_enemy;
+
+        random_enemy = new Enemy(enemy_pool[std::rand() % enemy_pool.size()]); // Randomly choose an enemy from the pool
+
         grid[enemy_y][enemy_x].set_type("enemy");
-        grid[enemy_y][enemy_x].set_enemy(new Enemy("Goblin", 50, 10)); // Example enemy
+        grid[enemy_y][enemy_x].set_enemy(random_enemy); // Example enemy
     }
 }
 

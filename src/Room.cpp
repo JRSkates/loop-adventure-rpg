@@ -66,12 +66,14 @@ void Room::enter_room(Player& player, const Map& map) {
 
         type = "empty"; // Mark room as empty after interacting
     } else if (type == "enemy" && enemy != nullptr) {
-        std::cout << "An enemy, " << enemy->get_name() << ", appears!" << std::endl;
+        std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
 
         // Start combat
         while (enemy->is_alive() && player.get_health() > 0) {
-            std::cout << "1. Attack the enemy" << std::endl;
-            std::cout << "2. Run away" << std::endl;
+            std::cout << std::endl;
+            std::cout << "| 1. Attack the enemy" << std::endl;
+            std::cout << "| 2. Run away" << std::endl;
+            std::cout << "Enter your choice: ";
             int choice;
             std::cin >> choice;
 
@@ -89,6 +91,7 @@ void Room::enter_room(Player& player, const Map& map) {
         }
 
         if (!enemy->is_alive()) {
+            player.gain_experience(enemy->get_experience_value());
             type = "empty"; // Room becomes empty after enemy is defeated
         }
     } else if (type == "exit") {

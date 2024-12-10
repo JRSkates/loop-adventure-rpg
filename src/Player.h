@@ -39,6 +39,7 @@ public:
     void gain_experience(int amount);
 
     void view_inventory();
+    void view_stats();
 
     bool is_dead() const;
 };

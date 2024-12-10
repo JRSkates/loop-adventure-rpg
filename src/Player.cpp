@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player.h"
 #include "Enemy.h"
+#include "Utils.h"
 
 // Constructor
 Player::Player(std::string player_name) 
@@ -26,14 +27,14 @@ int Player::get_experience() const { return experience; };
 // Takes the damage from the player's health 
 void Player::take_damage(int damage) {
     health -= damage;
-    std::cout << name << " takes " << damage << " damage!" << std::endl;
+    std::cout << "| " << name << " takes " << damage << " damage. Remaining health: "<< health << std::endl;
     if (health <= 0) {
         std::cout << name << " has died." << std::endl;
     }
 }
 
 void Player::attack(Enemy& enemy) const {
-    std::cout << name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
+    std::cout << "| "<< name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
     enemy.take_damage(attack_power);
 }
 
@@ -54,6 +55,20 @@ void Player::gain_experience(int amount) {
 
 void Player::view_inventory() {
     inventory.display_inventory();
+}
+
+void Player::view_stats() {
+    clear_screen();
+    std::cout << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "|                        STATS                           |" << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    std::cout << "| Name: " << name << std::endl;
+    std::cout << "| Health: " << health << "/" << 100 << std::endl;
+    std::cout << "| Level: " << level << std::endl;
+    std::cout << "| Experience: " << experience << "/" << 100 << std::endl;
+    std::cout << "==========================================================" << std::endl;
+    continue_screen();
 }
 
 bool Player::is_dead() const {
