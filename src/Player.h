@@ -7,7 +7,6 @@
 #include "Inventory.h"
 #include "Enemy.h"
 
-class Inventory; // Forward declaration to avoid circular dependency
 class Enemy; // Forward declaration to avoid circular dependency
 
 class Player {
@@ -40,6 +39,7 @@ public:
     void gain_experience(int amount);
 
     void view_inventory();
+    void use_item(const std::string& item_name);
     void view_stats();
 
     bool is_dead() const;

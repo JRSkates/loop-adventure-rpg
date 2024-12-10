@@ -39,16 +39,27 @@ void Player::attack(Enemy& enemy) const {
 }
 
 void Player::heal(int amount) {
+    std::cout << "[DEBUG] Entering heal method" << std::endl;
+
     std::cout << name << " heals for " << amount << " health!" << std::endl;
     health += amount;
-    std::cout << name << " health now: " << health << std::endl;
-    if (health > 100) health = 100; // Cap health at 100
+
+    // Cap health at 100
+    if (health > 100) {
+        health = 100;
+        std::cout << name << " healed to max health!: " << health << std::endl;
+    } else {
+        std::cout << name << " health now: " << health << std::endl;
+    }
+    std::cout << "[DEBUG] Exiting heal method" << std::endl;
 }
 
 void Player::boost_attack(int value) {
+    std::cout << "[DEBUG] Entering boost_attack method" << std::endl;
     attack_power += value;
     std::cout << name << " boosts attack power by " << value << "!" << std::endl;
     std::cout << "attack power is now: " << attack_power << std::endl;
+    std::cout << "[DEBUG] Exiting boost_attack method" << std::endl;
 }
 
 void Player::gain_experience(int amount) {
@@ -61,6 +72,15 @@ void Player::gain_experience(int amount) {
 
 void Player::view_inventory() {
     inventory.display_inventory();
+}
+
+void Player::use_item(const std::string& item_name) {
+    std::cout << "Raw input: [" << item_name << "]" << std::endl;
+    std::string clean_name = trim(item_name);
+    std::cout << "Trimmed input: [" << clean_name << "]" << std::endl;
+    if (!inventory.use_item(clean_name, *this)) {
+        std::cout << "Failed to use item: " << clean_name << std::endl;
+    }
 }
 
 void Player::view_stats() {

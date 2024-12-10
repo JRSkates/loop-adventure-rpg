@@ -3,6 +3,7 @@
 #include <string>
 #include "Item.h"
 #include "Inventory.h"
+#include "Player.h"
 #include "Utils.h"
 
 Inventory::Inventory(std::vector<Item> items) 
@@ -43,8 +44,6 @@ void Inventory::display_inventory() const {
     }
 
     std::cout << "==========================================================" << std::endl;
-
-    continue_screen();
 }
 
 
