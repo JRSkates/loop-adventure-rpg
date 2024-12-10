@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Player.h"
+#include "Enemy.h"
 
 // Constructor
 Player::Player(std::string player_name) 
-    : name(player_name), health(100), level(1), experience(0), inventory() {
+    : name(player_name), health(100), level(1), experience(0), inventory(), attack_power(20) {
 }
 
 // Inventory Accessor
@@ -24,12 +25,16 @@ int Player::get_experience() const { return experience; };
 
 // Takes the damage from the player's health 
 void Player::take_damage(int damage) {
-
     health -= damage;
     std::cout << name << " takes " << damage << " damage!" << std::endl;
     if (health <= 0) {
         std::cout << name << " has died." << std::endl;
     }
+}
+
+void Player::attack(Enemy& enemy) const {
+    std::cout << name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
+    enemy.take_damage(attack_power);
 }
 
 void Player::heal(int amount) {
