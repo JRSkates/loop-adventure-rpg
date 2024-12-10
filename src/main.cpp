@@ -38,6 +38,12 @@ int main() {
             std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
             continue; // Restart the loop
         }
+
+        // Check if the player is dead before continuing the game loop
+        if (player.is_dead()) {
+            std::cout << "Game over! You have died." << std::endl;
+            is_running = false; // Exit the game loop
+        }
         
 
         switch (choice) {
@@ -92,4 +98,4 @@ void display_menu() {
 }
 
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp -o game && ./game

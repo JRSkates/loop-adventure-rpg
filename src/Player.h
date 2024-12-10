@@ -39,6 +39,8 @@ public:
     void gain_experience(int amount);
 
     void view_inventory();
+
+    bool is_dead() const;
 };
 
 #endif // _PLAYER_H_

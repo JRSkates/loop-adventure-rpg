@@ -63,6 +63,21 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
         grid[loot_y][loot_x].set_type("loot");
         grid[loot_y][loot_x].set_loot(random_item);
     }
+
+    // Randomly place enemy rooms
+    int num_enemy_rooms = std::rand() % 3 + 2; // Randomly choose 2-5 enemy rooms
+    for (int i = 0; i < num_enemy_rooms; ++i) {
+        int enemy_x, enemy_y;
+        do {
+            enemy_x = std::rand() % width;
+            enemy_y = std::rand() % height;
+        } while ((enemy_x == player_x && enemy_y == player_y) || // Avoid starting position
+                (enemy_x == goal_x && enemy_y == goal_y) ||     // Avoid goal position
+                grid[enemy_y][enemy_x].get_type() != "empty");  // Avoid existing occupied rooms
+
+        grid[enemy_y][enemy_x].set_type("enemy");
+        grid[enemy_y][enemy_x].set_enemy(new Enemy("Goblin", 50, 10)); // Example enemy
+    }
 }
 
 

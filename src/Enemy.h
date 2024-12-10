@@ -2,7 +2,8 @@
 #define _ENEMY_H_
 
 #include <string>
-#include "Player.h"
+
+class Player; // Forward declaration
 
 class Enemy {
 private:

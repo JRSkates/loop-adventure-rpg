@@ -43,9 +43,9 @@ char Room::get_symbol() const {
     if (type == "empty") return '.';
     else if (type == "start") return 'S';
     else if (type == "loot") return 'L';
+    else if (type == "enemy") return '!';
     else if (type == "exit") return 'E';
     else return '?';
-
 }
 
 // Update `enter_room` to handle `Item`

@@ -55,3 +55,7 @@ void Player::gain_experience(int amount) {
 void Player::view_inventory() {
     inventory.display_inventory();
 }
+
+bool Player::is_dead() const {
+    return health <= 0;
+}
