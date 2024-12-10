@@ -5,6 +5,10 @@
 #include <vector>
 #include <string>
 #include "Inventory.h"
+#include "Enemy.h"
+
+class Inventory; // Forward declaration to avoid circular dependency
+class Enemy; // Forward declaration to avoid circular dependency
 
 class Player {
 private:
@@ -12,6 +16,7 @@ private:
     int health;
     int level;
     int experience;
+    int attack_power;
     Inventory inventory;
 
 public:
@@ -29,10 +34,14 @@ public:
 
     //Methods
     void take_damage(int damage);
+    void attack(Enemy& enemy) const;
     void heal(int amount);
     void gain_experience(int amount);
 
     void view_inventory();
+    void view_stats();
+
+    bool is_dead() const;
 };
 
 #endif // _PLAYER_H_

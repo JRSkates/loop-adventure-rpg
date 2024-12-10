@@ -6,6 +6,8 @@
 #include <vector>
 #include "Item.h"
 #include "Player.h"
+#include "Enemy.h"
+
 
 class Map; // Forward declaration to avoid circular dependency
 
@@ -16,10 +18,11 @@ private:
     int y;
     std::string type; // eg: empty, exit, loot
     Item* loot; // Pointer to an Item object (nullptr if no item)
+    Enemy* enemy; // Pointer to an Enemy object (nullptr if no enemy)
 
 public:
     // Constructor
-    Room(int x, int y, const std::string& type = "empty", Item* loot = nullptr);
+    Room(int x, int y, const std::string& type = "empty", Item* loot = nullptr, Enemy* enemy = nullptr);
 
     ~Room();
 
@@ -28,10 +31,13 @@ public:
     int get_y() const;
     std::string get_type() const;
     Item* get_loot() const;
+    Enemy* get_enemy() const;
 
     // Setters
     void set_type(const std::string &type);
     void set_loot(Item* loot);
+
+    void set_enemy(Enemy* enemy);
 
     // Methods
     char get_symbol() const; // returns a character representing the room

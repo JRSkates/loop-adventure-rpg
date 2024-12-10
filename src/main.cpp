@@ -6,6 +6,7 @@
 #include "Utils.h"
 #include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
+#include "../assets/game_over_message.h"
 
 void display_menu();
 // bool toggle_map(Map& map);
@@ -22,6 +23,13 @@ int main() {
     bool show_map = false;
 
     while (is_running) {
+        // Check if the player is dead before continuing the game loop
+        if (player.is_dead()) {
+            display_game_over_message();
+            is_running = false; // Exit the game loop
+            break;
+        }
+
         if (show_map) {
             map.display_map();
         }
@@ -66,6 +74,9 @@ int main() {
                 player.view_inventory();
                 break;
             case 4:
+                player.view_stats();
+                break;
+            case 5:
                 std::cout << "Exiting the game. Goodbye!" << std::endl;
                 is_running = false;
                 break;
@@ -86,10 +97,11 @@ void display_menu() {
     std::cout << "| 1. Toggle Map                                         |" << std::endl;
     std::cout << "| 2. Move Player                                        |" << std::endl;
     std::cout << "| 3. View Inventory                                     |" << std::endl;
-    std::cout << "| 4. Quit                                               |" << std::endl;
+    std::cout << "| 4. View Player Stats                                  |" << std::endl;
+    std::cout << "| 5. Quit                                               |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
 
-// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp -o game && ./game
+// clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp -o game && ./game
