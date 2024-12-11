@@ -110,7 +110,7 @@ void Map::display_map() const {
         std::cout << std::string(grid[0].size() - grid[y].size(), ' ') << " |" << std::endl; // Align row
     }
     std::cout << "==========================================================" << std::endl;
-    std::cout << "| Player position: (" << player_x << ", " << player_y << ")                    |" << std::endl;
+    std::cout << "| Player position: (" << player_x << ", " << player_y << ")" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << std::endl;
 }

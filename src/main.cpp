@@ -23,7 +23,8 @@ int main() {
 
     bool is_running = true;
     bool show_map = false;
-        for (int map_count = 0; map_count < total_maps && is_running; ++map_count) {
+    
+    for (int map_count = 0; map_count < total_maps && is_running; ++map_count) {
         std::cout << "==========================================================\n";
         std::cout << "|                     MAP " << (map_count + 1) << " STARTED                     |\n";
         std::cout << "==========================================================\n";
