@@ -39,8 +39,6 @@ void Player::attack(Enemy& enemy) const {
 }
 
 void Player::heal(int amount) {
-    std::cout << "[DEBUG] Entering heal method" << std::endl;
-
     std::cout << name << " heals for " << amount << " health!" << std::endl;
     health += amount;
 
@@ -51,15 +49,12 @@ void Player::heal(int amount) {
     } else {
         std::cout << name << " health now: " << health << std::endl;
     }
-    std::cout << "[DEBUG] Exiting heal method" << std::endl;
 }
 
 void Player::boost_attack(int value) {
-    std::cout << "[DEBUG] Entering boost_attack method" << std::endl;
     attack_power += value;
     std::cout << name << " boosts attack power by " << value << "!" << std::endl;
     std::cout << "attack power is now: " << attack_power << std::endl;
-    std::cout << "[DEBUG] Exiting boost_attack method" << std::endl;
 }
 
 void Player::gain_experience(int amount) {
