@@ -74,13 +74,24 @@ void Player::view_inventory() {
     inventory.display_inventory();
 }
 
-void Player::use_item(const std::string& item_name) {
-    std::cout << "Raw input: [" << item_name << "]" << std::endl;
+void Player::use_item() {
+    clear_screen();
+    inventory.display_inventory();
+    std::string item_name;
+
+    // // Ensure proper input handling before reading the item name
+    std::cin.clear(); // Clear error flags
+    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+
+    std::cout << "Enter the name of the item you want to use: ";
+    std::cin.ignore();
+    std::getline(std::cin, item_name); // Read the item name
     std::string clean_name = trim(item_name);
-    std::cout << "Trimmed input: [" << clean_name << "]" << std::endl;
     if (!inventory.use_item(clean_name, *this)) {
         std::cout << "Failed to use item: " << clean_name << std::endl;
     }
+
+    continue_screen();
 }
 
 void Player::view_stats() {

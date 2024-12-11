@@ -10,7 +10,7 @@
 
 void display_menu();
 void display_inventory(Player& player);
-void display_use_item(Player& player);
+// void display_use_item(Player& player);
 
 
 int main() {
@@ -77,8 +77,9 @@ int main() {
                 display_inventory(player);
                 break;
             case 4:
-                display_use_item(player);
-                continue_screen();
+                player.use_item();
+                //display_use_item(player);
+                // continue_screen();
                 break;
             case 5:
                 player.view_stats();
@@ -116,28 +117,28 @@ void display_inventory(Player& player) {
     continue_screen();
 }
 
-void display_use_item(Player& player) {
-    clear_screen();
-    player.view_inventory();
-    std::string item_name;
+ //void display_use_item(Player& player) {
+    // clear_screen();
+    // player.view_inventory();
+    // std::string item_name;
 
-    // // Ensure proper input handling before reading the item name
-    std::cin.clear(); // Clear error flags
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+    // // // Ensure proper input handling before reading the item name
+    // std::cin.clear(); // Clear error flags
+    // // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
 
-    std::cout << "Enter the name of the item you want to use: ";
-    std::cin.ignore();
-    std::getline(std::cin, item_name); // Read the item name
+    // std::cout << "Enter the name of the item you want to use: ";
+    // std::cin.ignore();
+    // std::getline(std::cin, item_name); // Read the item name
 
-    std::cout << "Raw input: [" << item_name << "]" << std::endl; // Debugging
-    player.use_item(item_name); // Attempt to use the item
+    //std::cout << "Raw input: [" << item_name << "]" << std::endl; // Debugging
+    //player.use_item(item_name); // Attempt to use the item
 
     // Additional buffer clearing to fix lingering input
-    std::cin.clear(); 
+    // std::cin.clear(); 
     // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Double-check for lingering newline
 
     //continue_screen(); // Wait for the user to press Enter
-}
+// }
 
 // make - creates the game file
 // ./game
