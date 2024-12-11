@@ -84,7 +84,7 @@ void Room::enter_room(Player& player) {
                 }
             } else if (choice == 2) {
                 std::cout << "You fled the room!" << std::endl;
-                return;
+                break;
             } else {
                 std::cout << "Invalid choice. Try again." << std::endl;
             }

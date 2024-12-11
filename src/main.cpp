@@ -9,7 +9,9 @@
 #include "../assets/game_over_message.h"
 
 void display_menu();
-// bool toggle_map(Map& map);
+void display_inventory(Player& player);
+// void display_use_item(Player& player);
+
 
 int main() {
     std::cout << "================================================================" << std::endl;
@@ -41,6 +43,7 @@ int main() {
 
         // Check if the input is invalid
         if (std::cin.fail()) {
+            clear_screen();
             std::cin.clear(); // Clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
             std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
@@ -71,12 +74,17 @@ int main() {
                 break;
             }
             case 3:
-                player.view_inventory();
+                display_inventory(player);
                 break;
             case 4:
-                player.view_stats();
+                player.use_item();
+                //display_use_item(player);
+                // continue_screen();
                 break;
             case 5:
+                player.view_stats();
+                break;
+            case 6:
                 std::cout << "Exiting the game. Goodbye!" << std::endl;
                 is_running = false;
                 break;
@@ -94,14 +102,45 @@ void display_menu() {
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                      GAME MENU                        |" << std::endl;
     std::cout << "==========================================================" << std::endl;
-    std::cout << "| 1. Toggle Map                                         |" << std::endl;
+    std::cout << "| 1. Toggle Map        TEST                                 |" << std::endl;
     std::cout << "| 2. Move Player                                        |" << std::endl;
     std::cout << "| 3. View Inventory                                     |" << std::endl;
-    std::cout << "| 4. View Player Stats                                  |" << std::endl;
-    std::cout << "| 5. Quit                                               |" << std::endl;
+    std::cout << "| 4. Use Item                                           |" << std::endl;
+    std::cout << "| 5. View Player Stats                                  |" << std::endl;
+    std::cout << "| 6. Quit                                               |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
+void display_inventory(Player& player) {
+    player.view_inventory();
+    continue_screen();
+}
+
+ //void display_use_item(Player& player) {
+    // clear_screen();
+    // player.view_inventory();
+    // std::string item_name;
+
+    // // // Ensure proper input handling before reading the item name
+    // std::cin.clear(); // Clear error flags
+    // // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
+
+    // std::cout << "Enter the name of the item you want to use: ";
+    // std::cin.ignore();
+    // std::getline(std::cin, item_name); // Read the item name
+
+    //std::cout << "Raw input: [" << item_name << "]" << std::endl; // Debugging
+    //player.use_item(item_name); // Attempt to use the item
+
+    // Additional buffer clearing to fix lingering input
+    // std::cin.clear(); 
+    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Double-check for lingering newline
+
+    //continue_screen(); // Wait for the user to press Enter
+// }
+
+// make - creates the game file
+// ./game
 
 // clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp -o game && ./game

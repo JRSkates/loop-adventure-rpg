@@ -6,6 +6,10 @@
 #include <string>
 #include "Item.h"
 
+
+class Item; // Forward declaration to avoid circular dependency
+class Player; // Forward declaration to avoid circular dependency
+
 class Inventory {
 private:
     std::vector<Item> items;
@@ -24,6 +28,7 @@ public:
     bool has_item(const std::string& item_name) const; // General-purpose method to check for any item
     bool has_key() const; // Specific method to check for the Key
 
+    bool use_item(const std::string& item_name, Player& player);
 
 };
 
