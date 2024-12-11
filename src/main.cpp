@@ -16,83 +16,96 @@ void display_inventory(Player& player);
 int main() {
     std::cout << "================================================================" << std::endl;
     // Initialize player and map
+    const int total_maps = 3;
     Player player("Hero");
-    Map map(10, 10);
     clear_screen();
     display_welcome_message();
 
     bool is_running = true;
     bool show_map = false;
+    
+    for (int map_count = 0; map_count < total_maps && is_running; ++map_count) {
+        std::cout << "==========================================================\n";
+        std::cout << "|                     MAP " << (map_count + 1) << " STARTED                     |\n";
+        std::cout << "==========================================================\n";
+        Map map(10, 10);
+        bool map_complete = false;
 
-    while (is_running) {
-        // Check if the player is dead before continuing the game loop
-        if (player.is_dead()) {
-            display_game_over_message();
-            is_running = false; // Exit the game loop
-            break;
-        }
-
-        if (show_map) {
-            map.display_map();
-        }
-        // Display menu
-        display_menu();
-
-        int choice;
-        std::cin >> choice;
-
-        // Check if the input is invalid
-        if (std::cin.fail()) {
-            clear_screen();
-            std::cin.clear(); // Clear the error flag
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Discard invalid input
-            std::cout << "Invalid input. Please enter a number between 1 and 3." << std::endl;
-            continue; // Restart the loop
-        }
-        
-
-        switch (choice) {
-            case 1: // Display map
-                clear_screen();
-                show_map = !show_map;
-                break;
-
-            case 2: { // Move player
-                char direction;
-                std::cout << "Enter direction (w/s/a/d): ";
-                std::cin >> direction;
-
-                // Update map with the player's movement
-                map.move_player(direction, player);
-                // Display updated map
-                // map.display_map();
-
-                if (map.check_win(player)) {
-                    display_goal_message();
-                    is_running = false; // Exit the game loop
-                }
+        while (!map_complete && is_running) {
+            // Check if the player is dead before continuing the game loop
+            if (player.is_dead()) {
+                display_game_over_message();
+                is_running = false; // Exit the game loop
                 break;
             }
-            case 3:
-                display_inventory(player);
-                break;
-            case 4:
-                player.use_item();
-                //display_use_item(player);
-                // continue_screen();
-                break;
-            case 5:
-                player.view_stats();
-                break;
-            case 6:
-                std::cout << "Exiting the game. Goodbye!" << std::endl;
-                is_running = false;
-                break;
-            default:
-                std::cout << "Invalid choice. Please try again." << std::endl;
+
+            if (show_map) {
+                map.display_map();
+            }
+            // Display menu
+            display_menu();
+
+            int choice;
+            std::cin >> choice;
+
+            if (std::cin.fail()) {
+                clear_screen();
+                std::cin.clear(); 
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number between 1 and 6." << std::endl;
+                continue;
+            }
+
+            switch (choice) {
+                case 1: // Toggle map
+                    clear_screen();
+                    show_map = !show_map;
+                    break;
+
+                case 2: { // Move player
+                    char direction;
+                    std::cout << "Enter direction (w/s/a/d): ";
+                    std::cin >> direction;
+                    map.move_player(direction, player);
+
+                    if (map.check_win(player)) {
+                        if (map_count < total_maps - 1) {
+                            std::cout << "You found the exit and used the key! Map " << (map_count + 1) << " complete.\n";
+                            // continue_screen();
+                        }
+                        map_complete = true;
+                    }
+                    break;
+                }
+                case 3:
+                    display_inventory(player);
+                    break;
+                case 4:
+                    player.use_item();
+                    break;
+                case 5:
+                    player.view_stats();
+                    break;
+                case 6:
+                    std::cout << "Exiting the game. Goodbye!" << std::endl;
+                    is_running = false;
+                    break;
+                default:
+                    std::cout << "Invalid choice. Please try again." << std::endl;
+            }
         }
 
-        std::cout << std::endl;
+        if (map_complete && map_count < total_maps - 1) {
+            std::cout << "You completed Map " << (map_count + 1) << "! Get ready for the next map...\n";
+            continue_screen();
+        }
+    }
+
+    // Display goal message only after completing all maps
+    if (!is_running) {
+        std::cout << "Game over. Thanks for playing!\n";
+    } else {
+        display_goal_message(); // Show the message after the final map
     }
 
     return 0;
