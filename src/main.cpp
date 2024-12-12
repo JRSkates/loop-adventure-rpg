@@ -62,7 +62,7 @@ int main() {
                     show_map = !show_map;
                     break;
 
-                case 2: { // Move player
+                case 2: // Move player
                     char direction;
                     std::cout << "Enter direction (w/s/a/d): ";
                     std::cin >> direction;
@@ -76,7 +76,6 @@ int main() {
                         map_complete = true;
                     }
                     break;
-                }
                 case 3:
                     display_inventory(player);
                     break;
