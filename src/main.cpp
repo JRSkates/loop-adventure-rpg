@@ -15,7 +15,6 @@ void display_inventory(Player& player);
 
 int main() {
     std::cout << "================================================================" << std::endl;
-    // Initialize player and map
     const int total_maps = 3;
     Player player("Hero");
     clear_screen();
@@ -23,7 +22,7 @@ int main() {
 
     bool is_running = true;
     bool show_map = false;
-    
+
     for (int map_count = 0; map_count < total_maps && is_running; ++map_count) {
         std::cout << "==========================================================\n";
         std::cout << "|                     MAP " << (map_count + 1) << " STARTED                     |\n";
@@ -32,65 +31,60 @@ int main() {
         bool map_complete = false;
 
         while (!map_complete && is_running) {
-            // Check if the player is dead before continuing the game loop
+            // Check if the player is dead
             if (player.is_dead()) {
                 display_game_over_message();
-                is_running = false; // Exit the game loop
+                is_running = false;
                 break;
             }
 
             if (show_map) {
                 map.display_map();
             }
-            // Display menu
             display_menu();
 
-            int choice;
-            std::cin >> choice;
+            std::string input;
+            std::cin >> input;
 
-            if (std::cin.fail()) {
-                clear_screen();
-                std::cin.clear(); 
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Invalid input. Please enter a number between 1 and 6." << std::endl;
-                continue;
-            }
+            if (input == "w" || input == "a" || input == "s" || input == "d") {
+                // Handle movement commands
+                map.move_player(input[0], player);
 
-            switch (choice) {
-                case 1: // Toggle map
-                    clear_screen();
-                    show_map = !show_map;
-                    break;
-
-                case 2: // Move player
-                    char direction;
-                    std::cout << "Enter direction (w/s/a/d): ";
-                    std::cin >> direction;
-                    map.move_player(direction, player);
-
-                    if (map.check_win(player)) {
-                        if (map_count < total_maps - 1) {
-                            std::cout << "You found the exit and used the key! Map " << (map_count + 1) << " complete.\n";
-                            // continue_screen();
-                        }
-                        map_complete = true;
+                if (map.check_win(player)) {
+                    if (map_count < total_maps - 1) {
+                        std::cout << "You found the exit and used the key! Map " << (map_count + 1) << " complete.\n";
+                        // continue_screen();
                     }
-                    break;
-                case 3:
-                    display_inventory(player);
-                    break;
-                case 4:
-                    player.use_item();
-                    break;
-                case 5:
-                    player.view_stats();
-                    break;
-                case 6:
-                    std::cout << "Exiting the game. Goodbye!" << std::endl;
-                    is_running = false;
-                    break;
-                default:
-                    std::cout << "Invalid choice. Please try again." << std::endl;
+                    map_complete = true;
+                }
+            } else if (input.size() == 1 && std::isdigit(input[0])) {
+                // Handle menu options
+                int choice = input[0] - '0'; // Convert char to int
+                switch (choice) {
+                    case 1: // Toggle map
+                        clear_screen();
+                        show_map = !show_map;
+                        break;
+                    case 2:
+                        display_inventory(player);
+                        break;
+                    case 3:
+                        player.use_item();
+                        break;
+                    case 4:
+                        player.view_stats();
+                        break;
+                    case 5:
+                        std::cout << "Exiting the game. Goodbye!" << std::endl;
+                        is_running = false;
+                        break;
+                    default:
+                        clear_screen();
+                        std::cout << "Invalid choice. Please try again." << std::endl;
+                }
+            } else {
+                clear_screen();
+                std::cout << "Invalid input. Please enter a valid menu option or move command.\n";
             }
         }
 
@@ -100,11 +94,10 @@ int main() {
         }
     }
 
-    // Display goal message only after completing all maps
     if (!is_running) {
         std::cout << "Game over. Thanks for playing!\n";
     } else {
-        display_goal_message(); // Show the message after the final map
+        display_goal_message();
     }
 
     return 0;
@@ -115,11 +108,12 @@ void display_menu() {
     std::cout << "|                      GAME MENU                        |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "| 1. Toggle Map        TEST                                 |" << std::endl;
-    std::cout << "| 2. Move Player                                        |" << std::endl;
-    std::cout << "| 3. View Inventory                                     |" << std::endl;
-    std::cout << "| 4. Use Item                                           |" << std::endl;
-    std::cout << "| 5. View Player Stats                                  |" << std::endl;
-    std::cout << "| 6. Quit                                               |" << std::endl;
+    std::cout << "| 2. View Inventory                                     |" << std::endl;
+    std::cout << "| 3. Use Item                                           |" << std::endl;
+    std::cout << "| 4. View Player Stats                                  |" << std::endl;
+    std::cout << "| 5. Quit                                               |" << std::endl;
+    std::cout << "|                                                       |" << std::endl;
+    std::cout << "| Use 'w', 'a', 's', or 'd' to move directly.           |" << std::endl;
     std::cout << "==========================================================" << std::endl;
     std::cout << "Enter your choice: ";
 }
@@ -129,28 +123,6 @@ void display_inventory(Player& player) {
     continue_screen();
 }
 
- //void display_use_item(Player& player) {
-    // clear_screen();
-    // player.view_inventory();
-    // std::string item_name;
-
-    // // // Ensure proper input handling before reading the item name
-    // std::cin.clear(); // Clear error flags
-    // // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
-
-    // std::cout << "Enter the name of the item you want to use: ";
-    // std::cin.ignore();
-    // std::getline(std::cin, item_name); // Read the item name
-
-    //std::cout << "Raw input: [" << item_name << "]" << std::endl; // Debugging
-    //player.use_item(item_name); // Attempt to use the item
-
-    // Additional buffer clearing to fix lingering input
-    // std::cin.clear(); 
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Double-check for lingering newline
-
-    //continue_screen(); // Wait for the user to press Enter
-// }
 
 // make - creates the game file
 // ./game
