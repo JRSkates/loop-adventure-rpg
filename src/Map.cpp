@@ -36,7 +36,6 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
         {"Shield", "defense_boost", 15},
         {"Gold Coins", "currency", 100},
         {"Elixir", "heal", 100},
-        {"Key", "special", 0} // Add the Key as a special item
     };
 
     for (int i = 0; i < num_loot_rooms; ++i) {
