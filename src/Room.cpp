@@ -51,63 +51,65 @@ char Room::get_symbol() const {
 // Update `enter_room` to handle `Item`
 void Room::enter_room(Player& player) {
     clear_screen();
-    std::cout << std::endl;
-    std::cout << "==========================================================" << std::endl;
-    std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
-    std::cout << "==========================================================" << std::endl;
-    std::cout << "| You entered a room at (" << x << ", " << y << ").                         " << std::endl;
+    if (type != "empty") {
+        std::cout << std::endl;
+        std::cout << "==========================================================" << std::endl;
+        std::cout << "|                    ROOM INTERACTION                   |" << std::endl;
+        std::cout << "==========================================================" << std::endl;
+        std::cout << "| You entered a room at (" << x << ", " << y << ").                         " << std::endl;
 
-    if (type == "loot" && loot != nullptr) {
-        std::cout << "| You find an item: " << loot->get_name() << "!" << std::endl;
-        loot->display(); // Display item details
+        if (type == "loot" && loot != nullptr) {
+            std::cout << "| You find an item: " << loot->get_name() << "!" << std::endl;
+            loot->display(); // Display item details
 
-        player.get_inventory().add_item(*loot);
-        std::cout << "| " << loot->get_name() << " has been added to your Inventory!" << std::endl;
+            player.get_inventory().add_item(*loot);
+            std::cout << "| " << loot->get_name() << " has been added to your Inventory!" << std::endl;
 
-        type = "empty"; // Mark room as empty after interacting
-    } else if (type == "enemy" && enemy != nullptr) {
-        std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
+            type = "empty"; // Mark room as empty after interacting
+        } else if (type == "enemy" && enemy != nullptr) {
+            std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
 
-        // Start combat
-        while (enemy->is_alive() && player.get_health() > 0) {
-            std::cout << std::endl;
-            std::cout << "| 1. Attack the enemy" << std::endl;
-            std::cout << "| 2. Run away" << std::endl;
-            std::cout << "Enter your choice: ";
-            int choice;
-            std::cin >> choice;
+            // Start combat
+            while (enemy->is_alive() && player.get_health() > 0) {
+                std::cout << std::endl;
+                std::cout << "| 1. Attack the enemy" << std::endl;
+                std::cout << "| 2. Run away" << std::endl;
+                std::cout << "Enter your choice: ";
+                int choice;
+                std::cin >> choice;
 
-            if (choice == 1) {
-                player.attack(*enemy); // Player's attack damage (example)
-                if (enemy->is_alive()) {
-                    enemy->attack(player);
+                if (choice == 1) {
+                    player.attack(*enemy); // Player's attack damage (example)
+                    if (enemy->is_alive()) {
+                        enemy->attack(player);
+                    }
+                } else if (choice == 2) {
+                    std::cout << "You fled the room!" << std::endl;
+                    break;
+                } else {
+                    std::cout << "Invalid choice. Try again." << std::endl;
                 }
-            } else if (choice == 2) {
-                std::cout << "You fled the room!" << std::endl;
-                break;
-            } else {
-                std::cout << "Invalid choice. Try again." << std::endl;
             }
-        }
 
-        if (!enemy->is_alive()) {
-            player.gain_experience(enemy->get_experience_value());
-            type = "empty"; // Room becomes empty after enemy is defeated
-        }
-    } else if (type == "exit") {
-        if (player.get_inventory().has_item("Key")) {
-            std::cout << "| You found the exit and used the Key to escape!         |" << std::endl;
+            if (!enemy->is_alive()) {
+                player.gain_experience(enemy->get_experience_value());
+                type = "empty"; // Room becomes empty after enemy is defeated
+            }
+        } else if (type == "exit") {
+            if (player.get_inventory().has_item("Key")) {
+                std::cout << "| You found the exit and used the Key to escape!         |" << std::endl;
+            } else {
+                std::cout << "| The exit is locked! You need a Key to escape.          |" << std::endl;
+            }
         } else {
-            std::cout << "| The exit is locked! You need a Key to escape.          |" << std::endl;
+            std::cout << "| This room is empty!                                   |" << std::endl;
         }
-    } else {
-        std::cout << "| This room is empty!                                   |" << std::endl;
+
+        std::cout << "==========================================================" << std::endl;
+
+         // Pause to allow the player to read the interaction
+        continue_screen();
     }
-
-    std::cout << "==========================================================" << std::endl;
-
-     // Pause to allow the player to read the interaction
-    continue_screen();
 }
 
 

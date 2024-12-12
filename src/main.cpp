@@ -94,14 +94,12 @@ int main() {
                 std::cout << "The Key has been removed as you transition to the next map.\n";
             }
 
-            std::cout << "You completed Map " << (map_count + 1) << "! Get ready for the next map...\n";
+            // std::cout << "You completed Map " << (map_count + 1) << "! Get ready for the next map...\n";
             continue_screen();
         }
     }
 
-    if (!is_running) {
-        std::cout << "Game over. Thanks for playing!\n";
-    } else {
+    if (is_running) {
         display_goal_message();
     }
 
