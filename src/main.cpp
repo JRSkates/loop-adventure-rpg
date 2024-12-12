@@ -110,7 +110,7 @@ void display_menu() {
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                      GAME MENU                        |" << std::endl;
     std::cout << "==========================================================" << std::endl;
-    std::cout << "| 1. Toggle Map        TEST                                 |" << std::endl;
+    std::cout << "| 1. Toggle Map                                         |" << std::endl;
     std::cout << "| 2. View Inventory                                     |" << std::endl;
     std::cout << "| 3. Use Item                                           |" << std::endl;
     std::cout << "| 4. View Player Stats                                  |" << std::endl;
