@@ -17,6 +17,7 @@ private:
     int experience;
     Inventory inventory;
     int attack_power;
+    int defence;
 
 public:
     // Constructor
@@ -31,11 +32,17 @@ public:
     int get_level() const;
     int get_experience() const;
 
+    int get_attack_power() const;
+
+    int get_defence() const;
+
     //Methods
     void take_damage(int damage);
     void attack(Enemy& enemy) const;
     void heal(int amount);
     void boost_attack(int value);
+
+    void boost_defence(int value);
     void gain_experience(int amount);
 
     void view_inventory();

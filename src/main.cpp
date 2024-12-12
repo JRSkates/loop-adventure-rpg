@@ -89,6 +89,11 @@ int main() {
         }
 
         if (map_complete && map_count < total_maps - 1) {
+            // Remove the Key from the player's inventory
+            if (player.get_inventory().remove_item("Key")) {
+                std::cout << "The Key has been removed as you transition to the next map.\n";
+            }
+
             std::cout << "You completed Map " << (map_count + 1) << "! Get ready for the next map...\n";
             continue_screen();
         }

@@ -19,13 +19,14 @@ void Inventory::add_item(const Item& item) {
     items.push_back(item);
 }
 
-void Inventory::remove_item(int index) {
-    for(auto& item : items) {
-        if(item.get_name() == items[index].get_name()) {
-            items.erase(items.begin() + index);
-            return;
+bool Inventory::remove_item(const std::string& item_name) {
+    for (size_t i = 0; i < items.size(); ++i) {
+        if (items[i].get_name() == item_name) {
+            items.erase(items.begin() + i); // Remove the item
+            return true; // Item successfully removed
         }
     }
+    return false; // Item not found
 }
 
 void Inventory::display_inventory() const {
@@ -71,8 +72,8 @@ bool Inventory::use_item(const std::string& item_name, Player& player) {
                 player.heal(value);
             } else if (effect == "attack_boost") {
                 player.boost_attack(value);
-            } else if (effect == "special") {
-                std::cout << "You used a special item: " << item_name << "!" << std::endl;
+            } else if (effect == "defence_boost") {
+                player.boost_defence(value);
             }
 
             // Remove the used item from inventory

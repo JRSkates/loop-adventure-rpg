@@ -33,7 +33,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0) {
     std::vector<Item> item_pool = {
         {"Healing Potion", "heal", 50},
         {"Magic Sword", "attack_boost", 20},
-        {"Shield", "defense_boost", 15},
+        {"Shield", "defense_boost", 10},
         {"Gold Coins", "currency", 100},
         {"Elixir", "heal", 100},
     };
