@@ -5,7 +5,7 @@
 
 // Constructor
 Player::Player(std::string player_name) 
-    : name(player_name), health(100), level(1), experience(0), inventory(), attack_power(20) {
+    : name(player_name), health(100), level(1), experience(0), inventory(), attack_power(20), defence(0){
 }
 
 // Inventory Accessor
@@ -22,10 +22,22 @@ int Player::get_level() const { return level; };
 
 int Player::get_experience() const { return experience; };
 
+int Player::get_attack_power() const { return attack_power; };
+
+int Player::get_defence() const { return defence; };
+
 // Methods
 
 // Takes the damage from the player's health 
 void Player::take_damage(int damage) {
+    if (defence != 0) {
+        damage -= defence;
+        if (damage < 0) {
+            damage = 0;
+        }
+        std::cout << "| Defence reduces damage by " << defence << "!" << std::endl;
+        std::cout << "| Reduced damage: " << damage << std::endl;
+    }
     health -= damage;
     std::cout << "| " << name << " takes " << damage << " damage. Remaining health: "<< health << std::endl;
     if (health <= 0) {
@@ -55,6 +67,12 @@ void Player::boost_attack(int value) {
     attack_power += value;
     std::cout << name << " boosts attack power by " << value << "!" << std::endl;
     std::cout << "attack power is now: " << attack_power << std::endl;
+}
+
+void Player::boost_defence(int value) {
+    defence += value;
+    std::cout << name << " boosts defence by " << value << "!" << std::endl;
+    std::cout << "defence is now: " << defence << std::endl;
 }
 
 void Player::gain_experience(int amount) {
@@ -99,6 +117,8 @@ void Player::view_stats() {
     std::cout << "| Health: " << health << "/" << 100 << std::endl;
     std::cout << "| Level: " << level << std::endl;
     std::cout << "| Experience: " << experience << "/" << 100 << std::endl;
+    std::cout << "| Attack Power: " << attack_power << std::endl;
+    std::cout << "| Defence: " << defence << std::endl;
     std::cout << "==========================================================" << std::endl;
     continue_screen();
 }

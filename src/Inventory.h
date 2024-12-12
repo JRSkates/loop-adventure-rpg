@@ -22,7 +22,7 @@ public:
 
     // Methods
     void add_item(const Item& item);
-    void remove_item(int index);
+    bool remove_item(const std::string& item_name);
     void display_inventory() const;
 
     bool has_item(const std::string& item_name) const; // General-purpose method to check for any item
