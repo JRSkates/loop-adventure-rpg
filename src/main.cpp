@@ -8,6 +8,7 @@
 #include "../assets/welcome_message.h"
 #include "../assets/game_over_message.h"
 #include "../assets/first_map_message.h"
+#include "../assets/second_map_message.h"
 
 void display_menu();
 void display_inventory(Player& player);
@@ -135,7 +136,7 @@ void map_message(int map_num) {
             display_first_map_message();
             break;
         case 1:
-            std::cout << "You enter a room filled with treasures and loot." << std::endl;
+            display_second_map_message();
             break;
         case 2:
             std::cout << "You arrive at the final map and find the exit." << std::endl;
