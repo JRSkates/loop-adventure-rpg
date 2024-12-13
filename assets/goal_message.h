@@ -4,7 +4,7 @@
 #include <iostream>
 
 void display_goal_message() {
-    std::cout << R"(
+std::cout << R"(
     
 ██╗   ██╗  ██████╗  ██╗   ██╗    ██╗    ██╗ ██╗ ███╗   ██╗ ██╗
 ╚██╗ ██╔╝ ██╔═══██╗ ██║   ██║    ██║    ██║ ██║ ████╗  ██║ ██║

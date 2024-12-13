@@ -5,7 +5,7 @@
 #include "../src/Utils.h"
 
 void display_first_map_message() {
-    std::cout << R"(
+std::cout << R"(
 ---------------------------------------H---------------------------------------- 
 
                      You wake up in a dark and mysterious room

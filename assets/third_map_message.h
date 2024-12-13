@@ -1,21 +1,21 @@
-#ifndef _SECOND_MAP_MESSAGE_
-#define _SECOND_MAP_MESSAGE_
+#ifndef _THIRD_MAP_MESSAGE_
+#define _THIRD_MAP_MESSAGE_
 
 #include <iostream>
 #include "../src/Utils.h"
 
-void display_second_map_message() {
+void display_third_map_message() {
 std::cout << R"(
 ---------------------------------------H----------------------------------------
                                    
                     You walk into a dark and mysterious room
 
-                   "Okay I probably should have mentioned this"
+                 "Right THREE layers, I'm making a note of that"
 
                           The room looks very familiar
 
                           "Okay, THIS one is the exit 
-                         "2 layers, that was it I think"
+                    "3 layers, surely can't be more than that"
 
                          You see a new map on the floor
 
@@ -28,4 +28,4 @@ std::cout << R"(
 continue_screen();
 }
 
-#endif // _SECOND_MAP_MESSAGE_
+#endif // _THIRD_MAP_MESSAGE_
