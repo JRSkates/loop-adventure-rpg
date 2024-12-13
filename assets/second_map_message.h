@@ -11,9 +11,17 @@ void display_second_map_message() {
                     You walk into a dark and mysterious room
 
                    "Okay I probably should have mentioned this"
-                         "2 rooms, that was it I think"
+
+                          The room looks very familiar
+
+                          "Okay, THIS one is the exit 
+                         "2 layers, that was it I think"
 
                          You see a new map on the floor
+
+                      "Make sure you leave the old map too"
+
+                "Guess I better find the exit" you predictably say
 
 -------------------------------------------------------------------------------
 )" << std::endl;

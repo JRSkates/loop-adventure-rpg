@@ -25,8 +25,13 @@ void display_first_map_message() {
                                
             "This is where you were, well... it's where you are now."
 
+                    One of the rooms on the map is marked 'E'
+
+                       "E for exit right? I can't remember
+                      what we decided... it's probably fine"
+
          "I guess I'll try and find my way out" you think to yourself...
-         
+
 ---------------------------------------H----------------------------------------
 )" << std::endl;
 continue_screen();
