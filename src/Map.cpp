@@ -6,7 +6,7 @@
 #include "Utils.h"
 #include "Player.h"
 
-Map::Map(int width, int height) : player_x(0), player_y(0) {
+Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') {
     std::srand(std::time(0)); // Seed for random number generation
 
     // Randomize goal position
@@ -116,6 +116,8 @@ void Map::display_map() const {
 
 void Map::move_player(char direction, Player& player) {
     // Update player position based on direction
+
+    // Check if the new position is valid (inside the map)
     switch (direction) {
         case 'w': if (player_y > 0) player_y--; break;
         case 's': if (player_y < static_cast<int>(grid.size()) - 1) player_y++; break;
@@ -126,9 +128,10 @@ void Map::move_player(char direction, Player& player) {
             std::cout << "Invalid direction. Please try again." << std::endl;
             return;
     }
+    prev_direction = direction;
 
     // Interact with the room at the new player position
-    grid[player_y][player_x].enter_room(player);
+    grid[player_y][player_x].enter_room(player, *this);
 }
 
 
@@ -137,4 +140,17 @@ bool Map::check_win(Player& player) const {
         return player.get_inventory().has_item("Key"); // Check if player has the Key
     }
     return false; // Not in the exit room
+}
+
+void Map::previous_room(Player& player) {
+    char direction;
+    switch (prev_direction) {
+        case 'w': direction = 's'; break;
+        case 's': direction = 'w'; break;
+        case 'a': direction = 'd'; break;
+        case 'd': direction = 'a'; break;
+    }
+    std::cout << "You fled the room!" << std::endl;
+
+    move_player(direction, player);
 }

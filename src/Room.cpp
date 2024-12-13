@@ -49,7 +49,7 @@ char Room::get_symbol() const {
 }
 
 // Update `enter_room` to handle `Item`
-void Room::enter_room(Player& player) {
+void Room::enter_room(Player& player, Map& map) {
     clear_screen();
     if (type != "empty") {
         std::cout << std::endl;
@@ -68,7 +68,7 @@ void Room::enter_room(Player& player) {
             type = "empty"; // Mark room as empty after interacting
         } else if (type == "enemy" && enemy != nullptr) {
             std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
-
+            bool player_fled = false;
             // Start combat
             while (enemy->is_alive() && player.get_health() > 0) {
                 std::cout << std::endl;
@@ -84,7 +84,8 @@ void Room::enter_room(Player& player) {
                         enemy->attack(player);
                     }
                 } else if (choice == 2) {
-                    std::cout << "You fled the room!" << std::endl;
+                    player_fled = true;
+                    map.previous_room(player);
                     break;
                 } else {
                     std::cout << "Invalid choice. Try again." << std::endl;
@@ -93,7 +94,11 @@ void Room::enter_room(Player& player) {
 
             if (!enemy->is_alive()) {
                 player.gain_experience(enemy->get_experience_value());
-                type = "empty"; // Room becomes empty after enemy is defeated
+                type = "empty";  // Room becomes empty after enemy is defeated
+            } else {
+                if (player_fled == true) {
+                    player.flee();
+                }           
             }
         } else if (type == "exit") {
             if (player.get_inventory().has_item("Key")) {
@@ -107,10 +112,12 @@ void Room::enter_room(Player& player) {
 
         std::cout << "==========================================================" << std::endl;
 
-         // Pause to allow the player to read the interaction
+        // Pause to allow the player to read the interaction
         continue_screen();
     }
 }
+
+
 
 
 

@@ -126,3 +126,7 @@ void Player::view_stats() {
 bool Player::is_dead() const {
     return health <= 0;
 }
+
+void Player::flee() {
+    std::cout << name << " flees the room!" << std::endl;
+}

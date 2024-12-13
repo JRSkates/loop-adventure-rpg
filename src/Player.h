@@ -50,6 +50,8 @@ public:
     void view_stats();
 
     bool is_dead() const;
+
+    void flee();
 };
 
 #endif // _PLAYER_H_
