@@ -113,7 +113,7 @@ void Room::enter_room(Player& player, Map& map) {
         std::cout << "==========================================================" << std::endl;
 
         // Pause to allow the player to read the interaction
-        continue_screen();
+        continue_screen_clear_buffer();
     }
 }
 

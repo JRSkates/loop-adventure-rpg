@@ -4,7 +4,21 @@
 #include <iostream>
 
 void display_goal_message() {
-    std::cout << R"(
+std::cout << R"(
+---------------------------------------H----------------------------------------
+                                   
+                    You open the door and sunlight blinds you
+
+                       "Okay nice one pretty quick too!"
+
+              You drop the map on the floor and walk into the light
+
+                               "See you soon kid"
+
+---------------------------------------H----------------------------------------
+)" << std::endl;
+continue_screen();
+std::cout << R"(
     
 ██╗   ██╗  ██████╗  ██╗   ██╗    ██╗    ██╗ ██╗ ███╗   ██╗ ██╗
 ╚██╗ ██╔╝ ██╔═══██╗ ██║   ██║    ██║    ██║ ██║ ████╗  ██║ ██║

@@ -20,6 +20,7 @@ void display_welcome_message() {
       Choose wisely, for every decision shapes your fate.
 --------------------------------------------------------------
 )" << std::endl;
+continue_screen();
 }
 
 #endif // WELCOME_MESSAGE_H
