@@ -120,7 +120,7 @@ void Player::view_stats() {
     std::cout << "| Attack Power: " << attack_power << std::endl;
     std::cout << "| Defence: " << defence << std::endl;
     std::cout << "==========================================================" << std::endl;
-    continue_screen();
+    continue_screen_clear_buffer();
 }
 
 bool Player::is_dead() const {

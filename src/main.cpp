@@ -7,10 +7,12 @@
 #include "../assets/goal_message.h"
 #include "../assets/welcome_message.h"
 #include "../assets/game_over_message.h"
+#include "../assets/first_map_message.h"
 
 void display_menu();
 void display_inventory(Player& player);
 // void display_use_item(Player& player);
+void map_message(int map_num);
 
 
 int main() {
@@ -24,6 +26,7 @@ int main() {
     bool show_map = false;
 
     for (int map_count = 0; map_count < total_maps && is_running; ++map_count) {
+        map_message(map_count);
         std::cout << "==========================================================\n";
         std::cout << "|                     MAP " << (map_count + 1) << " STARTED                     |\n";
         std::cout << "==========================================================\n";
@@ -123,10 +126,24 @@ void display_menu() {
 
 void display_inventory(Player& player) {
     player.view_inventory();
-    continue_screen();
+    continue_screen_clear_buffer();
 }
 
-
+void map_message(int map_num) {
+    switch (map_num) {
+        case 0:
+            display_first_map_message();
+            break;
+        case 1:
+            std::cout << "You enter a room filled with treasures and loot." << std::endl;
+            break;
+        case 2:
+            std::cout << "You arrive at the final map and find the exit." << std::endl;
+            break;
+        default:
+            std::cout << "An unknown map has been encountered." << std::endl;
+    }
+}
 // make - creates the game file
 // ./game
 
