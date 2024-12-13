@@ -21,7 +21,7 @@ std::cout << R"(
 
                       "Make sure you leave the old map too"
 
-                "Guess I better find the exit" you predictably say
+                     "Guess I better find the exit" you say
 
 ---------------------------------------H----------------------------------------
 )" << std::endl;
