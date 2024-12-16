@@ -32,8 +32,8 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
     bool key_placed = false; // Flag to ensure the Key is placed
     std::vector<Item> item_pool = {
         {"Healing Potion", "heal", 50},
-        {"Magic Sword", "attack_boost", 20},
-        {"Shield", "defence_boost", 10},
+        {"Magic Sword", "attack_boost", 10},
+        {"Shield", "defence_boost", 5},
         {"Gold Coins", "currency", 100},
         {"Elixir", "heal", 100},
     };

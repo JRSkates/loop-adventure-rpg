@@ -74,9 +74,10 @@ void Room::enter_room(Player& player, Map& map) {
                 std::cout << std::endl;
                 std::cout << "| 1. Attack the enemy" << std::endl;
                 std::cout << "| 2. Run away" << std::endl;
-                std::cout << "Enter your choice: ";
+                std::cout << "| Enter your choice: ";
                 int choice;
                 std::cin >> choice;
+                std::cout << std::endl;
 
                 if (choice == 1) {
                     player.attack(*enemy); // Player's attack damage (example)

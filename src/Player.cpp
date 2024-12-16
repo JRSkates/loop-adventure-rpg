@@ -48,6 +48,7 @@ void Player::take_damage(int damage) {
 void Player::attack(Enemy& enemy) const {
     std::cout << "| "<< name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
     enemy.take_damage(attack_power);
+    std::cout << std::endl;
 }
 
 void Player::heal(int amount) {
