@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "Player.h"
 #include "Enemy.h"
 #include "Utils.h"
@@ -130,4 +131,43 @@ bool Player::is_dead() const {
 
 void Player::flee() {
     std::cout << name << " flees the room!" << std::endl;
+}
+
+void Player::save(std::ofstream& save_file) const {
+    save_file << name << "\n"
+              << health << "\n"
+              << level << "\n"
+              << experience << "\n"
+              << attack_power << "\n";
+
+    // Save inventory size and items
+    save_file << inventory.get_size() << "\n";
+    for (const auto& item : inventory.get_items()) {
+        save_file << item.get_name() << "\n"
+                  << item.get_effect() << "\n"
+                  << item.get_value() << "\n";
+    }
+}
+
+void Player::load(std::ifstream& save_file) {
+    std::getline(save_file, name);
+    save_file >> health >> level >> experience >> attack_power;
+
+    // Load inventory size and items
+    int inventory_size;
+    save_file >> inventory_size;
+    save_file.ignore(); // Ignore newline character
+
+    inventory.clear(); // Clear any existing inventory
+    for (int i = 0; i < inventory_size; ++i) {
+        std::string item_name, item_effect;
+        int item_value;
+
+        std::getline(save_file, item_name);
+        std::getline(save_file, item_effect);
+        save_file >> item_value;
+        save_file.ignore(); // Ignore newline character
+
+        inventory.add_item(Item(item_name, item_effect, item_value));
+    }
 }

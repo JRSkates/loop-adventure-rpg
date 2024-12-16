@@ -19,6 +19,8 @@ public:
     Inventory(std::vector<Item> items = {});
     // Getters
     int get_size() const;
+    const std::vector<Item>& get_items() const; // Return a reference to the items
+
 
     // Methods
     void add_item(const Item& item);
@@ -29,6 +31,8 @@ public:
     bool has_key() const; // Specific method to check for the Key
 
     bool use_item(const std::string& item_name, Player& player);
+
+    void clear(); 
 
 };
 

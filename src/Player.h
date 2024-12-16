@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 #include "Inventory.h"
 #include "Enemy.h"
 
@@ -52,6 +53,10 @@ public:
     bool is_dead() const;
 
     void flee();
+
+    void save(std::ofstream& save_file) const;  // Save player data
+    void load(std::ifstream& save_file);       // Load player data
+
 };
 
 #endif // _PLAYER_H_

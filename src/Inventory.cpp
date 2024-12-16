@@ -15,6 +15,10 @@ int Inventory::get_size() const {
     return items.size(); 
 };
 
+const std::vector<Item>& Inventory::get_items() const {
+    return items;
+}
+
 void Inventory::add_item(const Item& item) {
     items.push_back(item);
 }
@@ -85,3 +89,6 @@ bool Inventory::use_item(const std::string& item_name, Player& player) {
     return false; // Item not found
 }
 
+void Inventory::clear() {
+    items.clear();
+}

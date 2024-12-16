@@ -6,7 +6,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -Werror
 TARGET = game
 
 # Source files
-SRCS = src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp
+SRCS = src/main.cpp src/Game.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp
 
 # Object files (optional, useful for larger projects)
 OBJS = $(SRCS:.cpp=.o)

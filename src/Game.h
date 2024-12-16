@@ -13,7 +13,7 @@ private:
     bool show_map;
 
     void display_menu() const;
-    void display_inventory() const;
+    void display_inventory(Player& player) const;
     void map_message(int map_num) const;
     void save_game() const;
     void load_game();
