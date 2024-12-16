@@ -78,6 +78,15 @@ void Room::enter_room(Player& player, Map& map) {
                 std::cout << "| Enter your choice: ";
                 int choice;
                 std::cin >> choice;
+
+                if (std::cin.fail()) {
+                    // Clear the error flag and flush the buffer
+                    std::cin.clear(); 
+                    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    std::cout << "Invalid input. Please enter a number (1 or 2)." << std::endl;
+                    continue; // Restart the loop
+                }
+                
                 std::cout << std::endl;
 
                 if (choice == 1) {
