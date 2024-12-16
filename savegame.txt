@@ -1,13 +1,7 @@
 1
 Hero
 100
-3
-55
-50
-2
-Gold Coins
-currency
-100
-Gold Coins
-currency
-100
+1
+0
+20
+0

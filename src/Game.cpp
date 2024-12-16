@@ -66,8 +66,10 @@ void Game::continue_game() {
         new_game();
         return;
     }
+    
 
     load_game();
+    is_running = true;
     game_loop();
 }
 
@@ -162,12 +164,29 @@ void Game::save_game() const {
 // Load saved game progress
 void Game::load_game() {
     std::ifstream save_file("savegame.txt");
-    save_file >> current_map;
-    player.load(save_file);
+    if (!save_file.is_open()) {
+        std::cout << "Failed to load the game. Starting a new game.\n";
+        continue_screen_clear_buffer();
+        new_game();
+        return;
+    }
+
+    save_file >> current_map; // Load the current map index
+    player.load(save_file);   // Load the player's data
+
+    // Check if the player is dead after loading
+    if (player.is_dead()) {
+        std::cout << "The saved game shows the player is dead. Starting a new game.\n";
+        continue_screen_clear_buffer();
+        new_game();
+        return;
+    }
+
     save_file.close();
     std::cout << "Game loaded successfully.\n";
     continue_screen_clear_buffer();
 }
+
 
 // Display map-specific messages
 void Game::map_message(int map_num) const {
