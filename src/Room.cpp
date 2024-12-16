@@ -5,8 +5,8 @@
 #include <iostream>
 #include "Utils.h"
 
-Room::Room(int x, int y, const std::string& type, Item* loot, Enemy* enemy)
-    : x(x), y(y), type(type), loot(loot), enemy(enemy){};
+Room::Room(int x, int y, const std::string& type, Item* loot, Enemy* enemy, char map_symbol)
+    : x(x), y(y), type(type), loot(loot), enemy(enemy), map_symbol(map_symbol) {};
 
 Room::~Room() {
     if (loot != nullptr) {
@@ -39,13 +39,12 @@ void Room::set_enemy(Enemy* enemy) {
     this->enemy = enemy;
 }
 
+void Room::set_map_symbol(char symbol) {
+    this->map_symbol = symbol;
+}
+
 char Room::get_symbol() const {
-    if (type == "empty") return '.';
-    else if (type == "start") return 'S';
-    else if (type == "loot") return 'L';
-    else if (type == "enemy") return '!';
-    else if (type == "exit") return 'E';
-    else return '?';
+    return this->map_symbol;
 }
 
 // Update `enter_room` to handle `Item`
@@ -66,7 +65,9 @@ void Room::enter_room(Player& player, Map& map) {
             std::cout << "| " << loot->get_name() << " has been added to your Inventory!" << std::endl;
 
             type = "empty"; // Mark room as empty after interacting
+            map_symbol = '.';
         } else if (type == "enemy" && enemy != nullptr) {
+            map_symbol = '!';
             std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
             bool player_fled = false;
             // Start combat
@@ -96,6 +97,7 @@ void Room::enter_room(Player& player, Map& map) {
             if (!enemy->is_alive()) {
                 player.gain_experience(enemy->get_experience_value());
                 type = "empty";  // Room becomes empty after enemy is defeated
+                map_symbol = 'X';
             } else {
                 if (player_fled == true) {
                     player.flee();

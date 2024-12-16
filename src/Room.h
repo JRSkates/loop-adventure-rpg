@@ -19,10 +19,11 @@ private:
     std::string type; // eg: empty, exit, loot
     Item* loot; // Pointer to an Item object (nullptr if no item)
     Enemy* enemy; // Pointer to an Enemy object (nullptr if no enemy)
+    char map_symbol; // Character representing the room on the map
 
 public:
     // Constructor
-    Room(int x, int y, const std::string& type = "empty", Item* loot = nullptr, Enemy* enemy = nullptr);
+    Room(int x, int y, const std::string& type = "empty", Item* loot = nullptr, Enemy* enemy = nullptr, char map_symbol = '.');
 
     ~Room();
 
@@ -38,6 +39,8 @@ public:
     void set_loot(Item* loot);
 
     void set_enemy(Enemy* enemy);
+
+    void set_map_symbol(char symbol);
 
     // Methods
     char get_symbol() const; // returns a character representing the room

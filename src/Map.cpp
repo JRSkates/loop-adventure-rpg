@@ -26,6 +26,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
 
     // Mark the goal room as "exit"
     grid[goal_y][goal_x].set_type("exit");
+    grid[goal_y][goal_x].set_map_symbol('E');
 
     // Randomly place loot rooms
     int num_loot_rooms = std::rand() % 5 + 3; // Randomly choose 3-7 loot rooms
@@ -61,10 +62,11 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
 
         grid[loot_y][loot_x].set_type("loot");
         grid[loot_y][loot_x].set_loot(random_item);
+        grid[loot_y][loot_x].set_map_symbol('L'); // Example loot room symbol
     }
 
     // Randomly place enemy rooms
-    int num_enemy_rooms = std::rand() % 3 + 2; // Randomly choose 2-5 enemy rooms
+    int num_enemy_rooms = std::rand() % 7 + 4; // Randomly choose 2-5 enemy rooms
     std::vector<Enemy> enemy_pool = {
         {"Goblin", 50, 10, 25},
         {"Troll", 75, 20, 50},
