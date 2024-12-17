@@ -16,7 +16,7 @@ void display_inventory(Player& player);
 // void display_use_item(Player& player);
 void map_message(int map_num);
 
-
+// Game Class in different branch
 int main() {
     std::cout << "================================================================" << std::endl;
     const int total_maps = 3;

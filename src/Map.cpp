@@ -66,6 +66,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
     }
 
     // Randomly place enemy rooms
+    // Add Boss Room ?
     int num_enemy_rooms = std::rand() % 7 + 4; // Randomly choose 2-5 enemy rooms
     std::vector<Enemy> enemy_pool = {
         {"Goblin", 50, 10, 25},
