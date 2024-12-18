@@ -70,6 +70,7 @@ void Room::enter_room(Player& player, Map& map) {
             map_symbol = '!';
             std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
             bool player_fled = false;
+            
             // Start combat
             while (enemy->is_alive() && player.get_health() > 0) {
                 std::cout << std::endl;
@@ -112,6 +113,7 @@ void Room::enter_room(Player& player, Map& map) {
                     player.flee();
                 }           
             }
+
         } else if (type == "exit") {
             if (player.get_inventory().has_item("Key")) {
                 std::cout << "| You found the exit and used the Key to escape!         |" << std::endl;

@@ -97,10 +97,15 @@ void Player::use_item() {
     std::cin.clear(); // Clear error flags
     // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
 
-    std::cout << "Enter the name of the item you want to use: ";
+    std::cout << "Enter the name of the item you want to use\n Or 'Q' to go back: ";
     std::cin.ignore();
     std::getline(std::cin, item_name); // Read the item name
     std::string clean_name = trim(item_name);
+    if (clean_name == "Q") {
+        clear_screen();
+        return;
+    }
+    
     if (!inventory.use_item(clean_name, *this)) {
         std::cout << "Failed to use item: " << clean_name << std::endl;
     }
