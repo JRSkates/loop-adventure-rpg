@@ -21,7 +21,7 @@ private:
 
 public:
     // Constructor
-    Player(std::string name);
+    Player();
 
     // Setters
     void set_name(std::string player_name);

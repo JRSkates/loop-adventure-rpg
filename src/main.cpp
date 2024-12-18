@@ -23,7 +23,7 @@ int main() {
     clear_screen();
     display_welcome_message();
 
-    Player player("Player");
+    Player player;
     player_name(player);
 
     //std::cout << "Welcome, " << player.get_name() << "! Your adventure begins now." << std::endl;

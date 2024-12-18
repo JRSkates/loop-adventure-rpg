@@ -4,8 +4,8 @@
 #include "Utils.h"
 
 // Constructor
-Player::Player(std::string player_name) 
-    : name(player_name), health(100), level(1), experience(0), inventory(), attack_power(20), defence(0){
+Player::Player() 
+    : name("Player"), health(100), level(1), experience(0), inventory(), attack_power(20), defence(0){
 }
 
 void Player::set_name(std::string player_name) {
