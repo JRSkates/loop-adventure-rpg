@@ -8,6 +8,10 @@ Player::Player(std::string player_name)
     : name(player_name), health(100), level(1), experience(0), inventory(), attack_power(20), defence(0){
 }
 
+void Player::set_name(std::string player_name) {
+    name = player_name;
+}
+
 // Inventory Accessor
 Inventory& Player::get_inventory() {
     return inventory;
@@ -41,7 +45,9 @@ void Player::take_damage(int damage) {
     health -= damage;
     std::cout << "| " << name << " takes " << damage << " damage. Remaining health: "<< health << std::endl;
     if (health <= 0) {
-        std::cout << name << " has died." << std::endl;
+        std::cout << std::endl;
+        std::cout << "| " << name << " has died!" << std::endl;
+        std::cout << std::endl;
     }
 }
 

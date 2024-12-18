@@ -23,6 +23,9 @@ public:
     // Constructor
     Player(std::string name);
 
+    // Setters
+    void set_name(std::string player_name);
+
     // Inventory Accessor
     Inventory& get_inventory();
 

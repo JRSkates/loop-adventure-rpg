@@ -29,7 +29,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
     grid[goal_y][goal_x].set_map_symbol('E');
 
     // Randomly place loot rooms
-    int num_loot_rooms = std::rand() % 5 + 3; // Randomly choose 3-7 loot rooms
+    int num_loot_rooms = std::rand() % 7 + 4; // Randomly choose 3-7 loot rooms
     bool key_placed = false; // Flag to ensure the Key is placed
     std::vector<Item> item_pool = {
         {"Healing Potion", "heal", 50},

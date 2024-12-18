@@ -70,12 +70,13 @@ void Room::enter_room(Player& player, Map& map) {
             map_symbol = '!';
             std::cout << "| An enemy, " << enemy->get_name() << ", appears!" << std::endl;
             bool player_fled = false;
-            
+
             // Start combat
             while (enemy->is_alive() && player.get_health() > 0) {
                 std::cout << std::endl;
                 std::cout << "| 1. Attack the enemy" << std::endl;
                 std::cout << "| 2. Run away" << std::endl;
+                std::cout << "| 3. Use Item" << std::endl;
                 std::cout << "| Enter your choice: ";
                 int choice;
                 std::cin >> choice;
@@ -99,6 +100,11 @@ void Room::enter_room(Player& player, Map& map) {
                     player_fled = true;
                     map.previous_room(player);
                     break;
+                } else if (choice == 3) {
+                    player.use_item();
+                    if (enemy->is_alive()) {
+                        enemy->attack(player);
+                    }
                 } else {
                     std::cout << "Invalid choice. Try again." << std::endl;
                 }

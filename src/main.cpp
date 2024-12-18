@@ -11,18 +11,25 @@
 #include "../assets/second_map_message.h"
 #include "../assets/third_map_message.h"
 
+void player_name(Player& player);
 void display_menu();
 void display_inventory(Player& player);
-// void display_use_item(Player& player);
 void map_message(int map_num);
 
 // Game Class in different branch
 int main() {
     std::cout << "================================================================" << std::endl;
     const int total_maps = 3;
-    Player player("Hero");
     clear_screen();
     display_welcome_message();
+
+    Player player("Player");
+    player_name(player);
+
+    //std::cout << "Welcome, " << player.get_name() << "! Your adventure begins now." << std::endl;
+    // clear_screen();
+    //continue_screen();
+  
 
     bool is_running = true;
     bool show_map = false;
@@ -111,6 +118,22 @@ int main() {
     return 0;
 }
 
+void player_name(Player& player) {
+    clear_screen();
+    std::string player_name_input;
+
+    std::cin.clear(); // Clear error flags
+
+    std::cout << "Enter your name: ";
+
+    std::getline(std::cin, player_name_input); // Read the item name
+    std::string clean_name = trim(player_name_input);
+    player.set_name(clean_name);
+    std::cout << "Welcome, " << player.get_name() << "! Your adventure begins now." << std::endl;
+
+    continue_screen();
+}
+
 void display_menu() {
     std::cout << "==========================================================" << std::endl;
     std::cout << "|                      GAME MENU                        |" << std::endl;
@@ -146,7 +169,11 @@ void map_message(int map_num) {
             std::cout << "An unknown map has been encountered." << std::endl;
     }
 }
+
+
+// Compile and run the game
 // make - creates the game file
 // ./game
 
+// OR
 // clang++ -std=c++17 src/main.cpp src/Player.cpp src/Map.cpp src/Room.cpp src/Item.cpp src/Utils.cpp src/Inventory.cpp src/Enemy.cpp -o game && ./game
