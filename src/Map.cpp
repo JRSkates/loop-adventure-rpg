@@ -62,7 +62,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
 
         grid[loot_y][loot_x].set_type("loot");
         grid[loot_y][loot_x].set_loot(random_item);
-        grid[loot_y][loot_x].set_map_symbol('L'); // Example loot room symbol
+        grid[loot_y][loot_x].set_map_symbol('?'); // Example loot room symbol
     }
 
     // Randomly place enemy rooms
@@ -91,6 +91,7 @@ Map::Map(int width, int height) : player_x(0), player_y(0), prev_direction('w') 
 
         grid[enemy_y][enemy_x].set_type("enemy");
         grid[enemy_y][enemy_x].set_enemy(random_enemy); // Example enemy
+        grid[enemy_y][enemy_x].set_map_symbol('?');
     }
 }
 
