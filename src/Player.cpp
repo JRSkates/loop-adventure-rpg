@@ -52,34 +52,41 @@ void Player::take_damage(int damage) {
 }
 
 void Player::attack(Enemy& enemy) const {
-    std::cout << "| "<< name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
+    std::cout << "| " << name << " attacks " << enemy.get_name() << " for " << attack_power << " damage!" << std::endl;
     enemy.take_damage(attack_power);
     std::cout << std::endl;
 }
 
 void Player::heal(int amount) {
-    std::cout << name << " heals for " << amount << " health!" << std::endl;
+    std::cout << std::endl;
+    std::cout << "| " << name << " heals for " << amount << " health!" << std::endl;
     health += amount;
 
     // Cap health at 100
     if (health > 100) {
         health = 100;
-        std::cout << name << " healed to max health!: " << health << std::endl;
+        std::cout << "| " << name << " healed to max health!: " << health << std::endl;
+        std::cout << std::endl;
     } else {
-        std::cout << name << " health now: " << health << std::endl;
+        std::cout << "| " << name << " health now: " << health << std::endl;
+        std::cout << std::endl;
     }
 }
 
 void Player::boost_attack(int value) {
     attack_power += value;
-    std::cout << name << " boosts attack power by " << value << "!" << std::endl;
-    std::cout << "attack power is now: " << attack_power << std::endl;
+    std::cout << std::endl;
+    std::cout << "| " << name << " boosts attack power by " << value << "!" << std::endl;
+    std::cout << "| " << "Attack power is now: " << attack_power << std::endl;
+    std::cout << std::endl;
 }
 
 void Player::boost_defence(int value) {
     defence += value;
-    std::cout << name << " boosts defence by " << value << "!" << std::endl;
-    std::cout << "defence is now: " << defence << std::endl;
+    std::cout << std::endl;
+    std::cout << "| " << name << " boosts defence by " << value << "!" << std::endl;
+    std::cout << "| " << "Defence is now: " << defence << std::endl;
+    std::cout << std::endl;
 }
 
 void Player::gain_experience(int amount) {
@@ -101,13 +108,12 @@ void Player::use_item() {
 
     // // Ensure proper input handling before reading the item name
     std::cin.clear(); // Clear error flags
-    // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear input buffer
 
-    std::cout << "Enter the name of the item you want to use\n Or 'Q' to go back: ";
+    std::cout << "Enter the name of the item you want to use\nOr 'Q' to go back: ";
     std::cin.ignore();
     std::getline(std::cin, item_name); // Read the item name
     std::string clean_name = trim(item_name);
-    if (clean_name == "Q") {
+    if (clean_name == "Q" || clean_name == "q") {
         clear_screen();
         return;
     }

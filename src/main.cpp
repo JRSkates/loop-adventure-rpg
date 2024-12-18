@@ -26,11 +26,6 @@ int main() {
     Player player;
     player_name(player);
 
-    //std::cout << "Welcome, " << player.get_name() << "! Your adventure begins now." << std::endl;
-    // clear_screen();
-    //continue_screen();
-  
-
     bool is_running = true;
     bool show_map = false;
 
